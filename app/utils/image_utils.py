@@ -1,76 +1,32 @@
-from io import BytesIO
-from typing import Tuple
-
-import numpy as np
-from PIL import Image, UnidentifiedImageError
+from PIL import Image
 
 
-def load_image_from_upload_bytes(image_bytes: bytes, filename: str) -> Image.Image:
-    """
-    Convierte bytes de una imagen subida a un objeto PIL RGB.
-    """
+def clamp_bbox(bbox_xyxy: tuple[int, int, int, int], image_size: tuple[int, int]) -> tuple[int, int, int, int]:
+    width, height = image_size
+    x1, y1, x2, y2 = bbox_xyxy
+    x1 = max(0, min(x1, width - 1))
+    y1 = max(0, min(y1, height - 1))
+    x2 = max(x1 + 1, min(x2, width))
+    y2 = max(y1 + 1, min(y2, height))
+    return x1, y1, x2, y2
 
-    if not image_bytes:
-        raise ValueError(f"The file {filename} is empty.")
 
-    try:
-        image = Image.open(BytesIO(image_bytes))
-        image = image.convert("RGB")
+def crop_or_original(image: Image.Image, bbox_xyxy: tuple[int, int, int, int] | None) -> Image.Image:
+    if bbox_xyxy is None:
         return image
-
-    except UnidentifiedImageError:
-        raise ValueError(f"The file {filename} is not a valid image.")
+    return image.crop(clamp_bbox(bbox_xyxy, image.size))
 
 
 def center_crop(image: Image.Image, crop_ratio: float = 0.82) -> Image.Image:
-    """
-    Hace un recorte central como fallback cuando YOLO no logra detectar un objeto útil.
-    """
-
     width, height = image.size
-
-    new_width = int(width * crop_ratio)
-    new_height = int(height * crop_ratio)
-
-    left = int((width - new_width) / 2)
-    top = int((height - new_height) / 2)
-    right = left + new_width
-    bottom = top + new_height
-
-    return image.crop((left, top, right, bottom))
+    crop_width = max(1, round(width * crop_ratio))
+    crop_height = max(1, round(height * crop_ratio))
+    left = max(0, (width - crop_width) // 2)
+    top = max(0, (height - crop_height) // 2)
+    return image.crop((left, top, left + crop_width, top + crop_height))
 
 
-def crop_with_bbox(image: Image.Image, bbox: Tuple[int, int, int, int]) -> Image.Image:
-    """
-    Recorta una imagen usando bounding box.
-    """
-
-    width, height = image.size
-    x1, y1, x2, y2 = bbox
-
-    x1 = max(0, min(x1, width))
-    y1 = max(0, min(y1, height))
-    x2 = max(0, min(x2, width))
-    y2 = max(0, min(y2, height))
-
-    if x2 <= x1 or y2 <= y1:
+def crop_by_strategy(image: Image.Image, strategy: str) -> Image.Image:
+    if strategy == "center_crop":
         return center_crop(image)
-
-    return image.crop((x1, y1, x2, y2))
-
-
-def pil_to_numpy_rgb(image: Image.Image) -> np.ndarray:
-    """
-    Convierte PIL Image RGB a numpy array RGB.
-    """
-
-    return np.array(image.convert("RGB"))
-
-
-def rgb_to_hex(rgb: Tuple[int, int, int]) -> str:
-    """
-    Convierte RGB a HEX.
-    """
-
-    r, g, b = rgb
-    return f"#{r:02x}{g:02x}{b:02x}"
+    return image

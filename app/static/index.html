@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Visual Product Validation</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="panel">
+        <div class="header">
+          <h1>Visual Product Validation</h1>
+          <p>Upload between 6 and 10 images of the same product to validate visual consistency.</p>
+          <p class="helper-copy">This validation checks product compatibility, not whether every image is visually identical.</p>
+        </div>
+
+        <form id="validation-form" class="form">
+          <label class="field">
+            <span>Product ID <small>optional</small></span>
+            <input id="product-id" name="product_id" type="text" placeholder="sku-123" autocomplete="off" />
+          </label>
+
+          <label class="file-drop" for="images">
+            <span class="file-drop-title">Select product images</span>
+            <span class="file-drop-copy">Choose 6 to 10 image files from the same listing.</span>
+            <input id="images" name="images" type="file" accept="image/*" multiple />
+          </label>
+
+          <div class="selection-row">
+            <span id="image-count">0 images selected</span>
+            <button id="validate-button" type="submit">Validate Images</button>
+          </div>
+
+          <p id="message" class="message" role="status" aria-live="polite"></p>
+        </form>
+
+        <section class="preview-section" aria-label="Selected image previews">
+          <h2>Preview</h2>
+          <div id="preview-grid" class="preview-grid"></div>
+        </section>
+      </section>
+
+      <section id="result-panel" class="panel result-panel hidden">
+        <div class="result-header">
+          <h2>Result</h2>
+          <span id="status-badge" class="status-badge"></span>
+        </div>
+
+        <div class="product-id-row">
+          <span>Product ID sent: <strong id="product-id-sent">None</strong></span>
+          <span>Product ID returned: <strong id="product-id-returned">None</strong></span>
+        </div>
+
+        <div id="summary-grid" class="summary-grid"></div>
+        <p id="result-note" class="result-note"></p>
+
+        <div class="details-grid">
+          <section>
+            <h3>Flagged Images</h3>
+            <div id="flagged-images" class="list-box"></div>
+          </section>
+
+          <section>
+            <h3>Dominant Colors</h3>
+            <div id="dominant-colors" class="color-list"></div>
+          </section>
+
+          <section>
+            <h3>Condition Estimate</h3>
+            <div id="condition-estimate" class="list-box"></div>
+          </section>
+        </div>
+
+        <section>
+          <h3>Pairwise Similarity Matrix</h3>
+          <div id="matrix-wrap" class="matrix-wrap"></div>
+        </section>
+
+        <section>
+          <h3>Debug Crops</h3>
+          <div id="crop-debug-grid" class="crop-debug-grid"></div>
+        </section>
+
+        <section>
+          <h3>View Types</h3>
+          <div id="view-types-wrap" class="matrix-wrap"></div>
+        </section>
+
+        <section>
+          <h3>Image Debug Info</h3>
+          <div id="image-debug-wrap" class="matrix-wrap"></div>
+        </section>
+
+        <section>
+          <h3>Full JSON</h3>
+          <pre class="json-block"><code id="json-output"></code></pre>
+        </section>
+      </section>
+    </main>
+
+    <script src="/static/script.js"></script>
+  </body>
+</html>

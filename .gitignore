@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+.env
+*.pt
+app/static/debug_crops/*
+!app/static/debug_crops/.gitkeep

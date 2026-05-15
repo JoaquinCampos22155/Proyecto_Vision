@@ -1,117 +1,57 @@
-from typing import List
+from pathlib import Path
+from typing import Annotated
 
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
-from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
 
-from app.schemas.response_schema import ValidationResponse
-from app.services.product_validator import ProductValidationService
-from app.utils.image_utils import load_image_from_upload_bytes
+from app.config import get_settings
+from app.schemas.response_schemas import ValidationResponse
+from app.services.validation_service import ProductImageValidationService, ValidationError
 
+
+STATIC_DIR = Path(__file__).parent / "static"
 
 app = FastAPI(
     title="Visual Product Validation API",
-    description="API de validación visual para detectar inconsistencias entre múltiples imágenes de un mismo producto.",
-    version="1.0.0",
+    version="0.1.0",
+    description="MVP API for detecting visual inconsistencies across product listing images.",
 )
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-validator_service = ProductValidationService()
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 
-@app.get("/")
-def root():
-    return {
-        "message": "Visual Product Validation API is running",
-        "version": "1.0.0",
-        "main_endpoint": "POST /validate-product",
-    }
+@app.exception_handler(ValidationError)
+async def validation_error_handler(_, exc: ValidationError) -> JSONResponse:
+    return JSONResponse(status_code=400, content={"detail": exc.message})
 
 
 @app.get("/health")
-def health_check():
-    return {
-        "status": "ok",
-        "service": "visual-validation-api",
-    }
+async def health() -> dict[str, str]:
+    return {"status": "ok"}
 
 
-@app.post("/validate-product", response_model=ValidationResponse)
-async def validate_product(
-    product_id: str = Form(...),
-    images: List[UploadFile] = File(...),
-):
-    """
-    Recibe entre 6 y 10 imágenes de un mismo producto y devuelve un análisis de consistencia visual.
-    """
+@app.get("/", response_class=FileResponse)
+async def index() -> FileResponse:
+    return FileResponse(STATIC_DIR / "index.html")
 
-    if len(images) < 6:
+
+@app.post("/validate-product-images", response_model=ValidationResponse)
+async def validate_product_images(
+    images: Annotated[list[UploadFile], File(description="Between 6 and 10 product images")],
+    product_id: str | None = Form(default=None, description="Optional product identifier"),
+) -> ValidationResponse:
+    settings = get_settings()
+    if len(images) < settings.min_images:
         raise HTTPException(
             status_code=400,
-            detail="You must upload at least 6 images.",
+            detail=f"At least {settings.min_images} images are required.",
         )
-
-    if len(images) > 10:
+    if len(images) > settings.max_images:
         raise HTTPException(
             status_code=400,
-            detail="You can upload a maximum of 10 images.",
+            detail=f"No more than {settings.max_images} images are allowed.",
         )
 
-    loaded_images = []
-
-    for image_file in images:
-        if not image_file.filename:
-            raise HTTPException(
-                status_code=400,
-                detail="Every uploaded image must have a filename.",
-            )
-
-        allowed_extensions = (".jpg", ".jpeg", ".png", ".webp")
-        filename_lower = image_file.filename.lower()
-
-        if not filename_lower.endswith(allowed_extensions):
-            raise HTTPException(
-                status_code=400,
-                detail=f"Invalid file format for {image_file.filename}. Allowed formats: jpg, jpeg, png, webp.",
-            )
-
-        try:
-            image_bytes = await image_file.read()
-
-            image = load_image_from_upload_bytes(
-                image_bytes=image_bytes,
-                filename=image_file.filename,
-            )
-
-            loaded_images.append(
-                {
-                    "filename": image_file.filename,
-                    "image": image,
-                }
-            )
-
-        except ValueError as error:
-            raise HTTPException(
-                status_code=400,
-                detail=str(error),
-            )
-
-    try:
-        result = validator_service.validate(
-            product_id=product_id,
-            images=loaded_images,
-        )
-
-        return result
-
-    except Exception as error:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Internal validation error: {str(error)}",
-        )
+    service = ProductImageValidationService(settings=settings)
+    return await service.validate(product_id=product_id, uploads=images)
