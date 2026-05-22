@@ -11,17 +11,22 @@ class Settings(BaseSettings):
     min_images: int = Field(default=6, ge=1)
     max_images: int = Field(default=10, ge=1)
 
-    consistent_threshold: float = Field(default=0.70, ge=-1.0, le=1.0)
+    # consistent_threshold default origin 0.7
+    consistent_threshold: float = Field(default=0.80, ge=-1.0, le=1.0)
     review_threshold: float = Field(default=0.50, ge=-1.0, le=1.0)
 
-    main_view_weight: float = Field(default=0.65, ge=0.0, le=1.0)
-    color_consistency_weight: float = Field(default=0.25, ge=0.0, le=1.0)
+    # main_view_weight default origin 0.65
+    main_view_weight: float = Field(default=0.55, ge=0.0, le=1.0)
+    # color_consistency_weight default origin 0.25
+    color_consistency_weight: float = Field(default=0.35, ge=0.0, le=1.0)
     detail_support_weight: float = Field(default=0.10, ge=0.0, le=1.0)
-
-    main_view_low_similarity_threshold: float = Field(default=0.45, ge=-1.0, le=1.0)
-    main_view_severe_similarity_threshold: float = Field(default=0.35, ge=-1.0, le=1.0)
+    # main_view_low_similarity_threshold default origin 0.45
+    main_view_low_similarity_threshold: float = Field(default=0.65, ge=-1.0, le=1.0)
+    # main_view_severe_similarity_threshold default origin 0.35
+    main_view_severe_similarity_threshold: float = Field(default=0.50, ge=-1.0, le=1.0)
     detail_visual_support_threshold: float = Field(default=0.35, ge=-1.0, le=1.0)
-    strong_color_mismatch_threshold: float = Field(default=0.55, ge=0.0, le=1.0)
+    # strong_color_mismatch_threshold default origin 0.55
+    strong_color_mismatch_threshold: float = Field(default=0.70, ge=0.0, le=1.0)
 
     use_yolo_crops: bool = False
     default_crop_strategy: Literal["full_image", "center_crop"] = "full_image"

@@ -1,0 +1,55 @@
+{
+  "case_id": "case_0076",
+  "case_type": "same_garment_type_different_color",
+  "expected_status": "inconsistent",
+  "capture_context": "floor",
+  "product_category": "t_shirt",
+  "main_product_description": "mixed images from the same Tommy Hilfiger t-shirt model but with different colors",
+  "expected_flagged_images": [4, 5],
+  "difficulty": "medium",
+  "notes": "Four images belong to a white Tommy Hilfiger t-shirt and two images belong to a dark blue version of the same shirt. The system should detect a strong color mismatch while recognizing similar garment structure.",
+  "images": [
+    {
+      "filename": "00_white_front.jpg",
+      "view_type": "main_front",
+      "product_group": "A",
+      "expected_flag": false
+    },
+    {
+      "filename": "01_white_detail_label.jpg",
+      "view_type": "detail_label",
+      "product_group": "A",
+      "expected_flag": false
+    },
+    {
+      "filename": "03_white_back.jpg",
+      "view_type": "main_back",
+      "product_group": "A",
+      "expected_flag": false
+    },
+    {
+      "filename": "04_blue_front.jpg",
+      "view_type": "main_front",
+      "product_group": "B",
+      "expected_flag": true,
+      "issue_type": "color_mismatch",
+      "expected_reason": "This image shows the same garment model but in a clearly different color."
+    },
+    {
+      "filename": "05_blue_detail_fabric.jpg",
+      "view_type": "detail_fabric",
+      "product_group": "B",
+      "expected_flag": true,
+      "issue_type": "color_mismatch",
+      "expected_reason": "This image belongs to a product with a different dominant color than the primary product."
+    },
+    {
+      "filename": "06_blue_back.JPG",
+      "view_type": "main_back",
+      "product_group": "B",
+      "expected_flag": true,
+      "issue_type": "color_mismatch",
+      "expected_reason": "This image belongs to a product with a different dominant color than the primary product."
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "case_id": "case_0073",
+  "case_type": "one_wrong_image",
+  "expected_status": "needs_review",
+  "capture_context": "floor",
+  "product_category": "polo_shirt",
+  "main_product_description": "white polo shirt photographed on floor tiles",
+  "expected_flagged_images": [5],
+  "difficulty": "medium",
+  "notes": "Five images belong to the same white polo shirt. One image belongs to a different white polo product and should be flagged without rejecting the entire listing.",
+  "images": [
+    {
+      "filename": "00_main_front.jpeg",
+      "view_type": "main_front",
+      "product_group": "A",
+      "expected_flag": false
+    },
+    {
+      "filename": "01_main_back.jpeg",
+      "view_type": "main_back",
+      "product_group": "A",
+      "expected_flag": false
+    },
+    {
+      "filename": "02_front_top_half.jpeg",
+      "view_type": "front_top_half",
+      "product_group": "A",
+      "expected_flag": false
+    },
+    {
+      "filename": "03_detail_label.jpeg",
+      "view_type": "detail_label",
+      "product_group": "A",
+      "expected_flag": false
+    },
+    {
+      "filename": "04_detail_fabric.jpeg",
+      "view_type": "detail_fabric",
+      "product_group": "A",
+      "expected_flag": false
+    },
+    {
+      "filename": "05_wrong_product.jpeg",
+      "view_type": "detail_label",
+      "product_group": "B",
+      "expected_flag": true,
+      "issue_type": "wrong_product",
+      "expected_reason": "This image belongs to a different polo product than the rest of the listing."
+    }
+  ]
+}

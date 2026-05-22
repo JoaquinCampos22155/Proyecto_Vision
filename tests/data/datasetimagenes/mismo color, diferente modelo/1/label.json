@@ -1,0 +1,55 @@
+{
+  "case_id": "case_0078",
+  "case_type": "same_color_different_model",
+  "expected_status": "needs_review",
+  "capture_context": "floor",
+  "product_category": "shirt",
+  "main_product_description": "mixed images from two gray shirts with similar color but different model and structure details",
+  "expected_flagged_images": [3, 4, 5],
+  "difficulty": "hard",
+  "notes": "The set mixes two visually similar gray garments. Both have similar colors, but they differ in sleeve style, fit, seams, neck structure, and overall model design.",
+  "images": [
+    {
+      "filename": "00_product_a_detail_fabric.jpeg",
+      "view_type": "detail_fabric",
+      "product_group": "A",
+      "expected_flag": false
+    },
+    {
+      "filename": "01_product_a_front.jpeg",
+      "view_type": "main_front",
+      "product_group": "A",
+      "expected_flag": false
+    },
+    {
+      "filename": "02_product_a_back.jpeg",
+      "view_type": "main_back",
+      "product_group": "A",
+      "expected_flag": false
+    },
+    {
+      "filename": "03_product_b_detail_fabric.jpeg",
+      "view_type": "detail_fabric",
+      "product_group": "B",
+      "expected_flag": true,
+      "issue_type": "different_model_same_color",
+      "expected_reason": "This detail belongs to a different garment model with similar color but different structure and fabric appearance."
+    },
+    {
+      "filename": "04_product_b_back.jpeg",
+      "view_type": "main_back",
+      "product_group": "B",
+      "expected_flag": true,
+      "issue_type": "different_model_same_color",
+      "expected_reason": "This image belongs to a different garment model despite having a similar color."
+    },
+    {
+      "filename": "05_product_b_front.jpeg",
+      "view_type": "main_front",
+      "product_group": "B",
+      "expected_flag": true,
+      "issue_type": "different_model_same_color",
+      "expected_reason": "This image appears visually similar in color but belongs to a different shirt model."
+    }
+  ]
+}
