@@ -1,14 +1,17 @@
 from dataclasses import dataclass
 from statistics import median
 
+from fastapi import logger
 import torch
 
 from app.config import Settings
 from app.schemas.response_schemas import FlaggedImage, ScoreBreakdown
 from app.services.color_service import ColorService
+from app.services.explainability import decision_logger
 from app.services.similarity_service import SimilarityService
 from app.services.view_type_service import DETAIL_VIEW_TYPES, MAIN_VIEW_TYPES, ViewTypeResult
-
+from app.services.explainability.decision_logger import DecisionLogger
+from app.services.explainability.explanation_builder import ExplanationBuilder
 
 @dataclass(frozen=True)
 class CompatibilityScoringResult:
@@ -28,12 +31,19 @@ class ScoringService:
         dominant_color_rgbs: list[tuple[int, int, int]],
     ) -> CompatibilityScoringResult:
         raw_score = SimilarityService.consistency_score(similarity_matrix)
+        decision_logger = DecisionLogger()
+        explainer = ExplanationBuilder(decision_logger)
         main_indices = [
             estimate.image_index for estimate in view_types if estimate.view_type in MAIN_VIEW_TYPES
         ]
         detail_indices = [
             estimate.image_index for estimate in view_types if estimate.view_type in DETAIL_VIEW_TYPES
         ]
+        for estimate in view_types:
+            explainer.evaluate_view_type(
+                image_name=f"image_{estimate.image_index}",
+                view_type=estimate.view_type,
+            )
 
         main_view_score = self._score_indices(similarity_matrix, main_indices)
         detail_support_score = self._detail_support_score(similarity_matrix, detail_indices, main_indices)
@@ -50,19 +60,86 @@ class ScoringService:
         )
 
         averages = self._average_similarity_details(similarity_matrix, view_types, main_indices)
+        for estimate in view_types:
+
+            image_index = estimate.image_index
+            avg_main = averages[image_index]["main"]
+
+            if avg_main is not None:
+
+                explainer.evaluate_similarity(
+                    image_name=f"image_{image_index}",
+                    similarity=avg_main,
+                    threshold=self.settings.main_view_low_similarity_threshold,
+                )
+        for estimate in view_types:
+
+            image_index = estimate.image_index
+
+            color_similarity = self._average_color_similarity(
+                image_index,
+                dominant_color_rgbs,
+                main_indices,
+            )
+
+            if color_similarity is not None:
+
+                explainer.evaluate_color(
+                    image_name=f"image_{image_index}",
+                    color_similarity=color_similarity,
+                    threshold=self.settings.strong_color_mismatch_threshold,
+                )
+        for estimate in view_types:
+
+            image_index = estimate.image_index
+
+            avg_main = averages[image_index]["main"]
+
+            color_similarity = self._average_color_similarity(
+                image_index,
+                dominant_color_rgbs,
+                main_indices,
+            )
+
+            if avg_main is not None and color_similarity is not None:
+
+                explainer.evaluate_possible_product_mismatch(
+                    image_name=f"image_{image_index}",
+                    similarity=avg_main,
+                    color_similarity=color_similarity,
+                    similarity_threshold=self.settings.main_view_low_similarity_threshold,
+                    color_threshold=self.settings.strong_color_mismatch_threshold,
+                )
+                
+        
         flagged_images = self._flag_images(
             view_types=view_types,
             averages=averages,
             dominant_color_rgbs=dominant_color_rgbs,
             main_indices=main_indices,
         )
+        for flagged in flagged_images:
+
+            similarity_score = (
+                flagged.average_similarity_against_main_views
+            )
+
+            if similarity_score is not None:
+
+                explainer.evaluate_outlier(
+                    image_name=f"image_{flagged.image_index}",
+                    similarity_score=similarity_score,
+                    outlier_threshold=self.settings.main_view_severe_similarity_threshold,
+                )
+                
+        
         status = self._status(
             robust_score=robust_score,
             flagged_images=flagged_images,
             main_indices=main_indices,
             dominant_color_rgbs=dominant_color_rgbs,
         )
-
+        print(decision_logger.summary())
         return CompatibilityScoringResult(
             scores=ScoreBreakdown(
                 raw_consistency_score=round(raw_score, 4),

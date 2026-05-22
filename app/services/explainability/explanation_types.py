@@ -1,0 +1,8 @@
+LOW_SIMILARITY = "low_similarity"
+COLOR_MISMATCH = "color_mismatch"
+DETAIL_IMAGE = "detail_image"
+OUTLIER_DETECTED = "outlier_detected"
+LOW_CONFIDENCE = "low_confidence"
+HIGH_CONSISTENCY = "high_consistency"
+MAIN_VIEW_MATCH = "main_view_match"
+POSSIBLE_DIFFERENT_PRODUCT = "possible_different_product"
