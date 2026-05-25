@@ -1,0 +1,51 @@
+{
+  "case_id": "case_0034",
+  "case_type": "same_product_closeups",
+  "expected_status": "consistent",
+  "capture_context": "mixed",
+  "product_category": "unknown",
+  "main_product_description": "same product close-up visual validation case",
+  "image_count": 6,
+  "is_complete_case": true,
+  "expected_flagged_images": [],
+  "difficulty": "medium",
+  "notes": "All images are expected to belong to the same product. This case includes close-up and detail images such as collar, label, logo, fabric, front view, and back view. Detail images should not be treated as inconsistencies.",
+  "images": [
+    {
+      "filename": "main_front.jpeg",
+      "view_type": "main_front_flat",
+      "product_group": "A",
+      "expected_flag": false
+    },
+    {
+      "filename": "main_back.jpeg",
+      "view_type": "main_back_flat",
+      "product_group": "A",
+      "expected_flag": false
+    },
+    {
+      "filename": "detail_collar.jpeg",
+      "view_type": "detail_collar",
+      "product_group": "A",
+      "expected_flag": false
+    },
+    {
+      "filename": "detail_label.jpeg",
+      "view_type": "detail_label",
+      "product_group": "A",
+      "expected_flag": false
+    },
+    {
+      "filename": "detail_logo.jpeg",
+      "view_type": "detail_logo",
+      "product_group": "A",
+      "expected_flag": false
+    },
+    {
+      "filename": "detail_fabric.jpeg",
+      "view_type": "detail_fabric",
+      "product_group": "A",
+      "expected_flag": false
+    }
+  ]
+}

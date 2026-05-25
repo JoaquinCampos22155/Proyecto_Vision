@@ -1,0 +1,51 @@
+{
+  "case_id": "case_0027",
+  "case_type": "same_product_normal",
+  "expected_status": "consistent",
+  "capture_context": "hanger",
+  "product_category": "unknown",
+  "main_product_description": "same product normal visual validation case",
+  "image_count": 6,
+  "is_complete_case": true,
+  "expected_flagged_images": [],
+  "difficulty": "easy",
+  "notes": "All images are expected to belong to the same product. This case is used to verify that the system approves normal same-product listings.",
+  "images": [
+    {
+      "filename": "detail_label.jpeg",
+      "view_type": "detail_label",
+      "product_group": "A",
+      "expected_flag": false
+    },
+    {
+      "filename": "front_top_half.jpeg",
+      "view_type": "front_top_half",
+      "product_group": "A",
+      "expected_flag": false
+    },
+    {
+      "filename": "main_back_flat.jpeg",
+      "view_type": "main_back_flat",
+      "product_group": "A",
+      "expected_flag": false
+    },
+    {
+      "filename": "main_front_flat.jpeg",
+      "view_type": "main_front_flat",
+      "product_group": "A",
+      "expected_flag": false
+    },
+    {
+      "filename": "main_front_flat_1.jpeg",
+      "view_type": "main_front_flat",
+      "product_group": "A",
+      "expected_flag": false
+    },
+    {
+      "filename": "main_front_flat_2.jpeg",
+      "view_type": "main_front_flat",
+      "product_group": "A",
+      "expected_flag": false
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "case_id": "case_0116",
+  "case_type": "invalid_images",
+  "expected_status": "needs_review",
+  "acceptable_status": [
+    "needs_review",
+    "inconsistent"
+  ],
+  "capture_context": "mixed",
+  "product_category": "unknown",
+  "main_product_description": "same product listing with invalid or low-quality images mixed in",
+  "image_count": 6,
+  "is_complete_case": true,
+  "expected_flagged_images": [
+    4,
+    5
+  ],
+  "expected_flagged_filenames": [
+    "invalid_blurry.jpeg",
+    "invalid_too_dark.jpeg"
+  ],
+  "difficulty": "medium",
+  "invalid_conditions": [
+    "blurry_image",
+    "too_dark"
+  ],
+  "notes": "This case includes valid same-product images mixed with invalid or low-quality images. The system should flag images that do not help validate the product, without necessarily treating all valid images as inconsistent.",
+  "images": [
+    {
+      "filename": "main_front_flat.jpeg",
+      "view_type": "main_front_flat",
+      "product_group": "A",
+      "expected_flag": false,
+      "issue_type": "none"
+    },
+    {
+      "filename": "main_back_flat.jpeg",
+      "view_type": "main_back_flat",
+      "product_group": "A",
+      "expected_flag": false,
+      "issue_type": "none"
+    },
+    {
+      "filename": "front_top_half.jpeg",
+      "view_type": "front_top_half",
+      "product_group": "A",
+      "expected_flag": false,
+      "issue_type": "none"
+    },
+    {
+      "filename": "detail_label.jpeg",
+      "view_type": "detail_label",
+      "product_group": "A",
+      "expected_flag": false,
+      "issue_type": "none"
+    },
+    {
+      "filename": "invalid_blurry.jpeg",
+      "view_type": "invalid_or_low_quality",
+      "product_group": "unknown",
+      "expected_flag": true,
+      "issue_type": "blurry_image",
+      "severity": "medium",
+      "expected_reason": "The image is blurry and does not provide reliable visual evidence for product validation."
+    },
+    {
+      "filename": "invalid_too_dark.jpeg",
+      "view_type": "invalid_or_low_quality",
+      "product_group": "unknown",
+      "expected_flag": true,
+      "issue_type": "too_dark",
+      "severity": "medium",
+      "expected_reason": "The image is too dark to reliably validate product consistency."
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "case_id": "case_0001",
+  "case_type": "same_product_normal",
+  "expected_status": "consistent",
+  "capture_context": "hanger",
+  "product_category": "t_shirt",
+  "main_product_description": "dark green Zara t-shirt on hanger",
+  "expected_flagged_images": [],
+  "difficulty": "easy",
+  "notes": "All six images belong to the same product. The set includes front views, back view, and collar/label details.",
+  "images": [
+    {
+      "filename": "00_front_top_half.jpg",
+      "view_type": "front_top_half",
+      "expected_flag": false
+    },
+    {
+      "filename": "01_detail_label.jpg",
+      "view_type": "detail_label",
+      "expected_flag": false
+    },
+    {
+      "filename": "02_main_front_flat.jpg",
+      "view_type": "main_front_flat",
+      "expected_flag": false
+    },
+    {
+      "filename": "03_main_front_flat.jpg",
+      "view_type": "main_front_flat",
+      "expected_flag": false
+    },
+    {
+      "filename": "04_main_front_flat.jpg",
+      "view_type": "main_front_flat",
+      "expected_flag": false
+    },
+    {
+      "filename": "05_main_back_flat.jpg",
+      "view_type": "main_back_flat",
+      "expected_flag": false
+    }
+  ]
+}

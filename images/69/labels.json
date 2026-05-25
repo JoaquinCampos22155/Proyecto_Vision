@@ -1,0 +1,85 @@
+{
+  "case_id": "case_0069",
+  "case_type": "same_product_hard_conditions",
+  "expected_status": "consistent",
+  "acceptable_status": [
+    "consistent",
+    "needs_review"
+  ],
+  "capture_context": "mixed",
+  "product_category": "unknown",
+  "main_product_description": "same product photographed under difficult lighting, background, wrinkle, or partial-view conditions",
+  "image_count": 6,
+  "is_complete_case": true,
+  "expected_flagged_images": [],
+  "difficulty": "medium",
+  "hard_conditions": [
+    "wrinkled_fabric",
+    "bad_lighting",
+    "partial_view",
+    "detail_view"
+  ],
+  "notes": "All images are expected to belong to the same product. Wrinkles, shadows, lighting changes, different backgrounds, and partial views should not be treated as product inconsistencies. The system may return needs_review if conditions are difficult, but it should not mark the case as inconsistent.",
+  "images": [
+    {
+      "filename": "main_front_flat.jpeg",
+      "view_type": "main_front_flat",
+      "product_group": "A",
+      "expected_flag": false,
+      "condition_note": "Same product front view. Wrinkles or imperfect placement are acceptable.",
+      "hard_condition_tags": [
+        "wrinkled_fabric"
+      ]
+    },
+    {
+      "filename": "main_front_flat_dark.jpeg",
+      "view_type": "main_front_flat",
+      "product_group": "A",
+      "expected_flag": false,
+      "condition_note": "Same product with darker lighting.",
+      "hard_condition_tags": [
+        "bad_lighting"
+      ]
+    },
+    {
+      "filename": "main_back_flat.jpeg",
+      "view_type": "main_back_flat",
+      "product_group": "A",
+      "expected_flag": false,
+      "condition_note": "Same product back view. Wrinkles or imperfect placement are acceptable.",
+      "hard_condition_tags": [
+        "wrinkled_fabric"
+      ]
+    },
+    {
+      "filename": "front_top_half.jpeg",
+      "view_type": "front_top_half",
+      "product_group": "A",
+      "expected_flag": false,
+      "condition_note": "Same product shown from the upper front area.",
+      "hard_condition_tags": [
+        "partial_view"
+      ]
+    },
+    {
+      "filename": "detail_collar.jpeg",
+      "view_type": "detail_collar",
+      "product_group": "A",
+      "expected_flag": false,
+      "condition_note": "Same product collar detail. Detail views should not be treated as inconsistencies.",
+      "hard_condition_tags": [
+        "detail_view"
+      ]
+    },
+    {
+      "filename": "partial_view.jpeg",
+      "view_type": "partial_view",
+      "product_group": "A",
+      "expected_flag": false,
+      "condition_note": "Same product shown in a partial or imperfect crop.",
+      "hard_condition_tags": [
+        "partial_view"
+      ]
+    }
+  ]
+}
