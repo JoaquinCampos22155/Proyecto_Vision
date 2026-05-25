@@ -170,6 +170,96 @@ tests/
 - El color dominante intenta ignorar fondo con una heuristica simple; no es segmentacion real.
 - La decision principal viene de embeddings, compatibilidad por tipo de toma y color auxiliar.
 
+## Dataset evaluation workflow
+
+El dataset en `images/` puede auditarse, dividirse y evaluarse contra el pipeline actual sin modificar imagenes ni `labels.json`.
+
+Auditar labels y estructura:
+
+```bash
+python scripts/audit_dataset.py --dataset-dir images --output-dir reports
+```
+
+Crear splits estratificados por `case_type`:
+
+```bash
+python scripts/create_dataset_splits.py --dataset-dir images --output-dir reports --seed 42
+```
+
+Evaluar todos los casos validos en modo directo:
+
+```bash
+py scripts/evaluate_dataset.py --dataset-dir images --output-dir reports --split all --mode direct
+```
+
+Evaluar un split especifico en modo directo:
+
+```bash
+py scripts/evaluate_dataset.py --dataset-dir images --output-dir reports --split validation --mode direct
+```
+
+Tambien existe un wrapper corto:
+
+```bash
+py evaluate.py --dataset-dir images --output-dir reports --split validation --mode direct
+```
+
+Los splits soportados son `calibration`, `validation`, `test` y `real_world`. `validation` se usa para debugging y regresion; `test` debe tratarse como medicion final no usada para ajustar reglas a mano; `real_world` queda para muestras de QA manual o datos de produccion.
+
+Para guardar un run versionado:
+
+```bash
+py scripts/evaluate_dataset.py --dataset-dir images --output-dir reports --split validation --mode direct --run-name candidate_validation
+```
+
+Tambien puedes evaluar usando la API HTTP. Primero corre la API:
+
+```bash
+py -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8081
+```
+
+Luego corre la evaluacion por HTTP:
+
+```bash
+py scripts/evaluate_dataset.py --dataset-dir images --output-dir reports --split all --mode http --api-url http://127.0.0.1:8081
+```
+
+El modo `auto` intenta usar el servicio interno y, si falla el import y existe `--api-url`, usa HTTP como fallback.
+
+Archivos generados:
+
+- `reports/dataset_audit_summary.json`: conteo general de carpetas, labels validos e issues.
+- `reports/dataset_audit_issues.csv`: detalle de problemas por carpeta.
+- `reports/dataset_splits.json`: asignacion de casos a `calibration`, `validation` y `test`.
+- `reports/dataset_split_summary.csv`: conteos por split y `case_type`.
+- `reports/evaluation_results.csv`: resultado resumido por caso.
+- `reports/evaluation_results.json`: respuesta completa del sistema por caso.
+- `reports/evaluation_summary.json`: metricas generales, por `case_type` y matriz de confusion.
+- `reports/evaluation_errors.csv`: casos donde falla el status aceptable o los flagged esperados.
+- `reports/error_cases/`: JSON por cada caso que requiere revision manual.
+- `reports/regression_report.json`: delta contra el baseline congelado, con warnings por categoria protegida.
+- `reports/no_overfitting_report.json`: resumen de riesgos de overfitting y regresiones.
+
+Baseline congelado:
+
+- `docs/evaluation_baselines/baseline_v0_3_post_fix.md`
+- `docs/evaluation_baselines/baseline_v0_3_post_fix.json`
+
+Protocolo de evaluacion:
+
+- `docs/evaluation_protocol.md`
+
+Como interpretar las metricas:
+
+- `exact_match_accuracy`: porcentaje donde `predicted_status` coincide exactamente con `expected_status`.
+- `acceptable_match_accuracy`: porcentaje donde `predicted_status` esta dentro de `acceptable_status`; si no existe, usa `expected_status`.
+- `flagged_exact_match_accuracy`: porcentaje donde los filenames flagged predichos coinciden exactamente con los esperados.
+- `flagged_partial_match_accuracy`: porcentaje donde al menos una imagen esperada como flagged fue detectada; si ambos sets estan vacios, cuenta como correcto.
+- `confusion_matrix`: cruza `expected_status` contra `predicted_status`.
+- `by_case_type`: muestra las mismas metricas agrupadas por tipo de caso.
+
+El servicio `app/services/invalid_image_service.py` contiene checks iniciales para `too_dark`, `blurry_image`, `low_resolution` y `duplicate_image`. Las senales de calidad se separan de los mismatches de producto: una advertencia de calidad moderada no deberia cambiar el status cuando la evidencia visual del producto es fuerte.
+
 ## Tests
 
 ```bash

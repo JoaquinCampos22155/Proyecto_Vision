@@ -1,0 +1,46 @@
+{
+  "baseline_file": "docs/evaluation_baselines/baseline_v0_3_post_fix.json",
+  "validation_metrics": {
+    "exact_match_accuracy": null,
+    "acceptable_match_accuracy": null,
+    "flagged_exact_match_accuracy": null,
+    "flagged_partial_match_accuracy": null,
+    "runtime_error_count": 0
+  },
+  "test_metrics": null,
+  "delta_vs_baseline": {
+    "exact_match_accuracy": {
+      "baseline": 0.774194,
+      "current": null,
+      "delta": null
+    },
+    "acceptable_match_accuracy": {
+      "baseline": 1.0,
+      "current": null,
+      "delta": null
+    },
+    "flagged_exact_match_accuracy": {
+      "baseline": 0.83871,
+      "current": null,
+      "delta": null
+    },
+    "flagged_partial_match_accuracy": {
+      "baseline": 0.870968,
+      "current": null,
+      "delta": null
+    },
+    "runtime_error_count": {
+      "baseline": 0,
+      "current": 0,
+      "delta": 0.0
+    }
+  },
+  "protected_category_regression_warnings": [],
+  "possible_overfitting_warnings": [
+    "No protected-category regression warnings were detected against the frozen baseline."
+  ],
+  "notes": [
+    "This report compares the current run to the frozen validation baseline.",
+    "If a separate test run exists, compare it manually before using validation gains as evidence of production readiness."
+  ]
+}

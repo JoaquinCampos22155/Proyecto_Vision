@@ -16,12 +16,22 @@ class Settings(BaseSettings):
 
     main_view_weight: float = Field(default=0.65, ge=0.0, le=1.0)
     color_consistency_weight: float = Field(default=0.25, ge=0.0, le=1.0)
-    detail_support_weight: float = Field(default=0.10, ge=0.0, le=1.0)
+    detail_support_weight: float = Field(default=0.05, ge=0.0, le=1.0)
 
     main_view_low_similarity_threshold: float = Field(default=0.45, ge=-1.0, le=1.0)
     main_view_severe_similarity_threshold: float = Field(default=0.35, ge=-1.0, le=1.0)
-    detail_visual_support_threshold: float = Field(default=0.35, ge=-1.0, le=1.0)
+    detail_visual_support_threshold: float = Field(default=0.25, ge=-1.0, le=1.0)
     strong_color_mismatch_threshold: float = Field(default=0.55, ge=0.0, le=1.0)
+    detail_color_mismatch_threshold: float = Field(default=0.45, ge=0.0, le=1.0)
+    detail_outlier_count_for_review: int = Field(default=2, ge=1)
+    high_main_flags_for_inconsistent: int = Field(default=2, ge=1)
+    invalid_images_for_inconsistent: int = Field(default=3, ge=1)
+    color_cluster_similarity_threshold: float = Field(default=0.75, ge=0.0, le=1.0)
+    consensus_cluster_low_support_threshold: float = Field(default=0.50, ge=-1.0, le=1.0)
+    consensus_cluster_gap_threshold: float = Field(default=0.18, ge=0.0, le=2.0)
+    model_cluster_within_similarity_threshold: float = Field(default=0.88, ge=-1.0, le=1.0)
+    model_cluster_between_similarity_threshold: float = Field(default=0.58, ge=-1.0, le=1.0)
+    model_cluster_color_similarity_threshold: float = Field(default=0.90, ge=0.0, le=1.0)
 
     use_yolo_crops: bool = False
     default_crop_strategy: Literal["full_image", "center_crop"] = "full_image"
@@ -54,6 +64,12 @@ class Settings(BaseSettings):
 
     resnet_model_name: Literal["resnet18", "resnet50"] = "resnet50"
     device: str = "auto"
+
+    invalid_dark_brightness_threshold: float = Field(default=35.0, ge=0.0, le=255.0)
+    invalid_blur_laplacian_threshold: float = Field(default=25.0, ge=0.0)
+    invalid_min_resolution_px: int = Field(default=224, ge=1)
+    invalid_duplicate_hamming_threshold: int = Field(default=1, ge=0)
+    invalid_duplicate_mean_abs_diff_threshold: float = Field(default=2.0, ge=0.0)
 
 
 @lru_cache

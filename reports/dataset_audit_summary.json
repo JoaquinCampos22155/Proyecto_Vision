@@ -1,0 +1,12 @@
+{
+  "total_folders_found": 120,
+  "folders_with_images": 118,
+  "empty_folders_skipped": 2,
+  "folders_with_labels": 118,
+  "folders_missing_labels": 0,
+  "valid_cases": 118,
+  "cases_with_issues": 0,
+  "issues_by_type": {
+    "empty_folder_skipped": 2
+  }
+}

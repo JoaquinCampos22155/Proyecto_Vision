@@ -7,6 +7,7 @@ from app.config import Settings
 from app.schemas.response_schemas import (
     CropDebugUrl,
     DominantColor,
+    FlaggedImage,
     GarmentTypeEstimate,
     ImageDebugInfo,
     Thresholds,
@@ -18,10 +19,11 @@ from app.services.condition_service import ConditionService
 from app.services.embedding_service import EmbeddingService
 from app.services.garment_detector import GarmentDetector
 from app.services.image_loader import ImageLoader, ImageLoadingError
+from app.services.invalid_image_service import InvalidImageFinding, InvalidImageService
 from app.services.scoring_service import ScoringService
 from app.services.similarity_service import SimilarityService
 from app.services.validation_service_types import DetectionResult
-from app.services.view_type_service import ViewTypeService
+from app.services.view_type_service import DETAIL_VIEW_TYPES, ViewTypeService
 from app.utils.image_utils import crop_by_strategy, crop_or_original
 
 
@@ -49,6 +51,7 @@ class ProductImageValidationService:
         self.color_service = ColorService()
         self.condition_service = ConditionService()
         self.view_type_service = ViewTypeService()
+        self.invalid_image_service = InvalidImageService(settings=settings)
 
     async def validate(self, product_id: str | None, uploads: list[UploadFile]) -> ValidationResponse:
         if len(uploads) < self.settings.min_images:
@@ -117,11 +120,40 @@ class ProductImageValidationService:
             view_types=view_type_results,
             dominant_color_rgbs=dominant_color_rgbs,
         )
+        invalid_findings = self.invalid_image_service.analyze_images(
+            [loaded.image for loaded in loaded_images],
+            [loaded.filename for loaded in loaded_images],
+        )
+        invalid_findings, quality_warning_findings = self._split_invalid_findings(
+            invalid_findings,
+            view_type_results,
+            scoring_result.scores.main_view_score,
+            scoring_result.scores.color_consistency_score,
+            scoring_result.scores.robust_consistency_score,
+        )
+        flagged_images = self._merge_flagged_images(
+            scoring_result.flagged_images,
+            [self._flag_from_invalid_finding(finding) for finding in invalid_findings],
+            [loaded.filename for loaded in loaded_images],
+        )
+        quality_warnings = self._merge_flagged_images(
+            [],
+            [self._flag_from_invalid_finding(finding) for finding in quality_warning_findings],
+            [loaded.filename for loaded in loaded_images],
+        )
+        final_status = self.scoring_service.resolve_status(
+            robust_score=scoring_result.scores.robust_consistency_score,
+            flagged_images=flagged_images,
+            view_types=view_type_results,
+            dominant_color_rgbs=dominant_color_rgbs,
+        )
+        if final_status == "consistent" and scoring_result.status == "needs_review":
+            final_status = "needs_review"
 
         return ValidationResponse(
             product_id=product_id,
             image_count=len(uploads),
-            status=scoring_result.status,
+            status=final_status,
             scores=scoring_result.scores,
             note=MVP_CALIBRATION_NOTE,
             thresholds=Thresholds(
@@ -140,7 +172,8 @@ class ProductImageValidationService:
                 )
                 for item in view_type_results
             ],
-            flagged_images=scoring_result.flagged_images,
+            flagged_images=flagged_images,
+            quality_warnings=quality_warnings,
             dominant_colors=dominant_colors,
             garment_type_estimates=garment_type_estimates,
             image_debug=image_debug,
@@ -199,3 +232,92 @@ class ProductImageValidationService:
         output_path = DEBUG_CROP_DIR / filename
         cropped_image.convert("RGB").save(output_path, format="JPEG", quality=90)
         return f"/static/debug_crops/{filename}"
+
+    @staticmethod
+    def _flag_from_invalid_finding(finding: InvalidImageFinding) -> FlaggedImage:
+        return FlaggedImage(
+            image_index=finding.image_index,
+            filename=finding.filename,
+            original_filename=finding.filename,
+            view_type="invalid_or_low_quality",
+            severity=finding.severity,
+            issue_type=finding.issue_type,
+            reason=finding.reason,
+            recommended_action=finding.recommended_action,
+        )
+
+    @staticmethod
+    def _merge_flagged_images(
+        scoring_flags: list[FlaggedImage],
+        invalid_flags: list[FlaggedImage],
+        ordered_filenames: list[str],
+    ) -> list[FlaggedImage]:
+        merged: list[FlaggedImage] = []
+        seen: set[tuple[int, str]] = set()
+        for flag in [*scoring_flags, *invalid_flags]:
+            if flag.filename is None and 0 <= flag.image_index < len(ordered_filenames):
+                flag.filename = ordered_filenames[flag.image_index]
+            if flag.original_filename is None and 0 <= flag.image_index < len(ordered_filenames):
+                flag.original_filename = ordered_filenames[flag.image_index]
+            key = (flag.image_index, flag.issue_type)
+            if key in seen:
+                continue
+            seen.add(key)
+            merged.append(flag)
+        return merged
+
+    def _split_invalid_findings(
+        self,
+        findings: list[InvalidImageFinding],
+        view_type_results,
+        main_view_score: float | None,
+        color_consistency_score: float,
+        robust_consistency_score: float,
+    ) -> tuple[list[InvalidImageFinding], list[InvalidImageFinding]]:
+        view_type_by_index = {item.image_index: item.view_type for item in view_type_results}
+        main_and_color_are_healthy = (
+            main_view_score is not None
+            and main_view_score >= self.settings.consistent_threshold
+            and color_consistency_score >= self.settings.consistent_threshold
+        )
+
+        strong_product_signal = (
+            robust_consistency_score >= 0.75
+            and color_consistency_score >= 0.90
+            and main_view_score is not None
+            and main_view_score >= 0.65
+        )
+        blur_only_findings = (
+            findings
+            and all(finding.issue_type == "blurry_image" and finding.severity == "medium" for finding in findings)
+        )
+        if strong_product_signal and blur_only_findings:
+            return [], findings
+
+        if not main_and_color_are_healthy:
+            return findings, []
+
+        single_medium_blur_with_strong_product_signal = (
+            len(findings) == 1
+            and findings[0].issue_type == "blurry_image"
+            and findings[0].severity == "medium"
+            and robust_consistency_score >= 0.80
+            and color_consistency_score >= 0.90
+            and main_view_score is not None
+            and main_view_score >= 0.70
+        )
+        if single_medium_blur_with_strong_product_signal:
+            return [], findings
+
+        filtered = []
+        warnings = []
+        for finding in findings:
+            is_detail_blur = (
+                finding.issue_type == "blurry_image"
+                and view_type_by_index.get(finding.image_index) in DETAIL_VIEW_TYPES
+            )
+            if is_detail_blur:
+                warnings.append(finding)
+            else:
+                filtered.append(finding)
+        return filtered, warnings

@@ -5,38 +5,46 @@
   "capture_context": "hanger",
   "product_category": "t_shirt",
   "main_product_description": "dark green Zara t-shirt on hanger",
+  "image_count": 6,
+  "is_complete_case": true,
   "expected_flagged_images": [],
   "difficulty": "easy",
   "notes": "All six images belong to the same product. The set includes front views, back view, and collar/label details.",
   "images": [
     {
-      "filename": "00_front_top_half.jpg",
-      "view_type": "front_top_half",
-      "expected_flag": false
-    },
-    {
-      "filename": "01_detail_label.jpg",
+      "filename": "detail_label.jpeg",
       "view_type": "detail_label",
+      "product_group": "A",
       "expected_flag": false
     },
     {
-      "filename": "02_main_front_flat.jpg",
-      "view_type": "main_front_flat",
+      "filename": "front_top_half.jpeg",
+      "view_type": "front_top_half",
+      "product_group": "A",
       "expected_flag": false
     },
     {
-      "filename": "03_main_front_flat.jpg",
-      "view_type": "main_front_flat",
-      "expected_flag": false
-    },
-    {
-      "filename": "04_main_front_flat.jpg",
-      "view_type": "main_front_flat",
-      "expected_flag": false
-    },
-    {
-      "filename": "05_main_back_flat.jpg",
+      "filename": "main_back_flat.jpeg",
       "view_type": "main_back_flat",
+      "product_group": "A",
+      "expected_flag": false
+    },
+    {
+      "filename": "main_front_flat.jpeg",
+      "view_type": "main_front_flat",
+      "product_group": "A",
+      "expected_flag": false
+    },
+    {
+      "filename": "main_front_flat_1.jpeg",
+      "view_type": "main_front_flat",
+      "product_group": "A",
+      "expected_flag": false
+    },
+    {
+      "filename": "main_front_flat_2.jpeg",
+      "view_type": "main_front_flat",
+      "product_group": "A",
       "expected_flag": false
     }
   ]

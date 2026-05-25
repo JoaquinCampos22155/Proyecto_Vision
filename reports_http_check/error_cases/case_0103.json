@@ -1,0 +1,409 @@
+{
+  "labels": {
+    "case_id": "case_0103",
+    "case_type": "same_garment_type_different_color",
+    "expected_status": "inconsistent",
+    "acceptable_status": [
+      "inconsistent",
+      "needs_review"
+    ],
+    "capture_context": "mixed",
+    "product_category": "unknown",
+    "main_product_description": "mixed images from the same garment type but clearly different colors",
+    "image_count": 6,
+    "is_complete_case": true,
+    "expected_flagged_images": [
+      0,
+      2
+    ],
+    "expected_flagged_filenames": [
+      "00_black_front.jpg",
+      "02_black_back.jpg"
+    ],
+    "expected_conflict_type": "different_color_same_garment_type",
+    "difficulty": "medium",
+    "color_groups": {
+      "black": [
+        "00_black_front.jpg",
+        "02_black_back.jpg"
+      ],
+      "pink": [
+        "01_pink_detail_label.jpg",
+        "03_pink_front.jpg",
+        "04_pink_detail_fabric.jpg",
+        "05_pink_top_half.jpg"
+      ]
+    },
+    "notes": "This case mixes images from the same garment type but clearly different colors. The system should detect the color mismatch and mark the listing as inconsistent or needs_review.",
+    "images": [
+      {
+        "filename": "00_black_front.jpg",
+        "view_type": "main_front_flat",
+        "color_group": "black",
+        "product_group": "B",
+        "expected_flag": true,
+        "issue_type": "color_mismatch",
+        "severity": "high",
+        "expected_reason": "This image shows the same garment type but in a clearly different color than the primary product group."
+      },
+      {
+        "filename": "01_pink_detail_label.jpg",
+        "view_type": "detail_label",
+        "color_group": "pink",
+        "product_group": "A",
+        "expected_flag": false,
+        "issue_type": "none"
+      },
+      {
+        "filename": "02_black_back.jpg",
+        "view_type": "main_back_flat",
+        "color_group": "black",
+        "product_group": "B",
+        "expected_flag": true,
+        "issue_type": "color_mismatch",
+        "severity": "high",
+        "expected_reason": "This image shows the same garment type but in a clearly different color than the primary product group."
+      },
+      {
+        "filename": "03_pink_front.jpg",
+        "view_type": "main_front_flat",
+        "color_group": "pink",
+        "product_group": "A",
+        "expected_flag": false,
+        "issue_type": "none"
+      },
+      {
+        "filename": "04_pink_detail_fabric.jpg",
+        "view_type": "detail_fabric",
+        "color_group": "pink",
+        "product_group": "A",
+        "expected_flag": false,
+        "issue_type": "none"
+      },
+      {
+        "filename": "05_pink_top_half.jpg",
+        "view_type": "front_top_half",
+        "color_group": "pink",
+        "product_group": "A",
+        "expected_flag": false,
+        "issue_type": "none"
+      }
+    ]
+  },
+  "system_response": {
+    "product_id": "case_0103",
+    "image_count": 6,
+    "status": "consistent",
+    "scores": {
+      "raw_consistency_score": 0.5863,
+      "main_view_score": 0.6751,
+      "detail_support_score": 0.6017,
+      "color_consistency_score": 0.8198,
+      "robust_consistency_score": 0.7039,
+      "low_confidence_reason": null
+    },
+    "note": "This is an MVP compatibility score using generic pretrained embeddings. It should be calibrated with real ecommerce image datasets before production use.",
+    "thresholds": {
+      "consistent": 0.7,
+      "needs_review": 0.5,
+      "main_view_low_similarity": 0.45,
+      "main_view_severe_similarity": 0.35,
+      "strong_color_mismatch": 0.55
+    },
+    "view_types": [
+      {
+        "image_index": 0,
+        "view_type": "main_front",
+        "confidence": 0.72,
+        "note": "Heuristic MVP estimate"
+      },
+      {
+        "image_index": 1,
+        "view_type": "detail_label",
+        "confidence": 0.74,
+        "note": "Heuristic MVP estimate"
+      },
+      {
+        "image_index": 2,
+        "view_type": "main_back",
+        "confidence": 0.72,
+        "note": "Heuristic MVP estimate"
+      },
+      {
+        "image_index": 3,
+        "view_type": "main_front",
+        "confidence": 0.72,
+        "note": "Heuristic MVP estimate"
+      },
+      {
+        "image_index": 4,
+        "view_type": "detail_fabric",
+        "confidence": 0.7,
+        "note": "Heuristic MVP estimate"
+      },
+      {
+        "image_index": 5,
+        "view_type": "partial_view",
+        "confidence": 0.6,
+        "note": "Heuristic MVP estimate"
+      }
+    ],
+    "flagged_images": [],
+    "dominant_colors": [
+      {
+        "image_index": 0,
+        "color_hex": "#303030",
+        "color_rgb": [
+          48,
+          48,
+          48
+        ]
+      },
+      {
+        "image_index": 1,
+        "color_hex": "#786060",
+        "color_rgb": [
+          120,
+          96,
+          96
+        ]
+      },
+      {
+        "image_index": 2,
+        "color_hex": "#303030",
+        "color_rgb": [
+          48,
+          48,
+          48
+        ]
+      },
+      {
+        "image_index": 3,
+        "color_hex": "#784848",
+        "color_rgb": [
+          120,
+          72,
+          72
+        ]
+      },
+      {
+        "image_index": 4,
+        "color_hex": "#786060",
+        "color_rgb": [
+          120,
+          96,
+          96
+        ]
+      },
+      {
+        "image_index": 5,
+        "color_hex": "#906060",
+        "color_rgb": [
+          144,
+          96,
+          96
+        ]
+      }
+    ],
+    "garment_type_estimates": [
+      {
+        "image_index": 0,
+        "label": "unknown",
+        "confidence": 0.0,
+        "note": "No garment-specific detection was found. The full image or a generic YOLO crop was used as fallback."
+      },
+      {
+        "image_index": 1,
+        "label": "unknown",
+        "confidence": 0.0,
+        "note": "No garment-specific detection was found. The full image or a generic YOLO crop was used as fallback."
+      },
+      {
+        "image_index": 2,
+        "label": "unknown",
+        "confidence": 0.0,
+        "note": "No garment-specific detection was found. The full image or a generic YOLO crop was used as fallback."
+      },
+      {
+        "image_index": 3,
+        "label": "unknown",
+        "confidence": 0.0,
+        "note": "No garment-specific detection was found. The full image or a generic YOLO crop was used as fallback."
+      },
+      {
+        "image_index": 4,
+        "label": "unknown",
+        "confidence": 0.0,
+        "note": "No garment-specific detection was found. The full image or a generic YOLO crop was used as fallback."
+      },
+      {
+        "image_index": 5,
+        "label": "unknown",
+        "confidence": 0.0,
+        "note": "No garment-specific detection was found. The full image or a generic YOLO crop was used as fallback."
+      }
+    ],
+    "image_debug": [
+      {
+        "image_index": 0,
+        "original_filename": "00_black_front.jpg",
+        "detector_used": false,
+        "detection_found": false,
+        "detection_confidence": null,
+        "bbox": null,
+        "fallback_used": true,
+        "crop_strategy": "full_image",
+        "rejected_detection_reason": null
+      },
+      {
+        "image_index": 1,
+        "original_filename": "01_pink_detail_label.jpg",
+        "detector_used": false,
+        "detection_found": false,
+        "detection_confidence": null,
+        "bbox": null,
+        "fallback_used": true,
+        "crop_strategy": "full_image",
+        "rejected_detection_reason": null
+      },
+      {
+        "image_index": 2,
+        "original_filename": "02_black_back.jpg",
+        "detector_used": false,
+        "detection_found": false,
+        "detection_confidence": null,
+        "bbox": null,
+        "fallback_used": true,
+        "crop_strategy": "full_image",
+        "rejected_detection_reason": null
+      },
+      {
+        "image_index": 3,
+        "original_filename": "03_pink_front.jpg",
+        "detector_used": false,
+        "detection_found": false,
+        "detection_confidence": null,
+        "bbox": null,
+        "fallback_used": true,
+        "crop_strategy": "full_image",
+        "rejected_detection_reason": null
+      },
+      {
+        "image_index": 4,
+        "original_filename": "04_pink_detail_fabric.jpg",
+        "detector_used": false,
+        "detection_found": false,
+        "detection_confidence": null,
+        "bbox": null,
+        "fallback_used": true,
+        "crop_strategy": "full_image",
+        "rejected_detection_reason": null
+      },
+      {
+        "image_index": 5,
+        "original_filename": "05_pink_top_half.jpg",
+        "detector_used": false,
+        "detection_found": false,
+        "detection_confidence": null,
+        "bbox": null,
+        "fallback_used": true,
+        "crop_strategy": "full_image",
+        "rejected_detection_reason": null
+      }
+    ],
+    "crop_debug_urls": [
+      {
+        "image_index": 0,
+        "url": "/static/debug_crops/case_0103_adfb50f0a14546c9a4235baae4fcd070_image_0.jpg"
+      },
+      {
+        "image_index": 1,
+        "url": "/static/debug_crops/case_0103_51ec04b606dc423c87cbd19d189938e1_image_1.jpg"
+      },
+      {
+        "image_index": 2,
+        "url": "/static/debug_crops/case_0103_d779ed93c6f441dea0099090c97dc131_image_2.jpg"
+      },
+      {
+        "image_index": 3,
+        "url": "/static/debug_crops/case_0103_29da21d5fef640389f7c1298fc5c9fbd_image_3.jpg"
+      },
+      {
+        "image_index": 4,
+        "url": "/static/debug_crops/case_0103_1bdfa7f3891a4bc4aca3ecf468a407bf_image_4.jpg"
+      },
+      {
+        "image_index": 5,
+        "url": "/static/debug_crops/case_0103_d5038892f3944034ab8ed4a14899eff0_image_5.jpg"
+      }
+    ],
+    "pairwise_similarity_matrix": [
+      [
+        1.0,
+        0.519,
+        0.7825,
+        0.7566,
+        0.4074,
+        0.6678
+      ],
+      [
+        0.519,
+        1.0,
+        0.4691,
+        0.5539,
+        0.5168,
+        0.6846
+      ],
+      [
+        0.7825,
+        0.4691,
+        1.0,
+        0.6824,
+        0.4544,
+        0.6208
+      ],
+      [
+        0.7566,
+        0.5539,
+        0.6824,
+        1.0,
+        0.5188,
+        0.6585
+      ],
+      [
+        0.4074,
+        0.5168,
+        0.4544,
+        0.5188,
+        1.0,
+        0.5013
+      ],
+      [
+        0.6678,
+        0.6846,
+        0.6208,
+        0.6585,
+        0.5013,
+        1.0
+      ]
+    ],
+    "condition_estimate": {
+      "label": "unknown",
+      "confidence": 0.0,
+      "note": "Condition estimation is only a suggestion and should not be used as a final decision."
+    }
+  },
+  "comparison": {
+    "exact_match": false,
+    "acceptable_match": false,
+    "flagged_exact_match": false,
+    "flagged_partial_match": false,
+    "error_type": "both"
+  },
+  "expected_flagged_filenames": [
+    "00_black_front.jpg",
+    "02_black_back.jpg"
+  ],
+  "predicted_flagged_filenames": [],
+  "error": ""
+}

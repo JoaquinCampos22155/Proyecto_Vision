@@ -1,0 +1,48 @@
+{
+  "baseline_file": "docs/evaluation_baselines/baseline_v0_3_post_fix.json",
+  "validation_metrics": {
+    "exact_match_accuracy": 0.709677,
+    "acceptable_match_accuracy": 0.967742,
+    "flagged_exact_match_accuracy": 0.774194,
+    "flagged_partial_match_accuracy": 0.806452,
+    "runtime_error_count": 0
+  },
+  "test_metrics": null,
+  "delta_vs_baseline": {
+    "exact_match_accuracy": {
+      "baseline": 0.774194,
+      "current": 0.709677,
+      "delta": -0.064517
+    },
+    "acceptable_match_accuracy": {
+      "baseline": 1.0,
+      "current": 0.967742,
+      "delta": -0.032258
+    },
+    "flagged_exact_match_accuracy": {
+      "baseline": 0.83871,
+      "current": 0.774194,
+      "delta": -0.064516
+    },
+    "flagged_partial_match_accuracy": {
+      "baseline": 0.870968,
+      "current": 0.806452,
+      "delta": -0.064516
+    },
+    "runtime_error_count": {
+      "baseline": 0,
+      "current": 0,
+      "delta": 0.0
+    }
+  },
+  "protected_category_regression_warnings": [
+    "one_wrong_image flagged_partial accuracy dropped below guardrail."
+  ],
+  "possible_overfitting_warnings": [
+    "one_wrong_image flagged_partial accuracy dropped below guardrail."
+  ],
+  "notes": [
+    "This report compares the current run to the frozen validation baseline.",
+    "If a separate test run exists, compare it manually before using validation gains as evidence of production readiness."
+  ]
+}

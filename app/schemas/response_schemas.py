@@ -21,7 +21,7 @@ class ScoreBreakdown(BaseModel):
 class ViewTypeEstimate(BaseModel):
     image_index: int
     view_type: str = Field(
-        pattern="^(main_front|main_back|detail_collar|detail_logo|detail_label|detail_fabric|partial_view|unknown)$"
+        pattern="^(main_front|main_back|detail_collar|detail_logo|detail_label|detail_fabric|partial_view|invalid_or_low_quality|unknown)$"
     )
     confidence: float
     note: str
@@ -29,8 +29,11 @@ class ViewTypeEstimate(BaseModel):
 
 class FlaggedImage(BaseModel):
     image_index: int
+    filename: str | None = None
+    original_filename: str | None = None
     view_type: str
     severity: str = Field(pattern="^(low|medium|high)$")
+    issue_type: str = "visual_outlier"
     reason: str
     recommended_action: str
     average_similarity_against_all: float | None = None
@@ -83,6 +86,7 @@ class ValidationResponse(BaseModel):
     thresholds: Thresholds
     view_types: list[ViewTypeEstimate]
     flagged_images: list[FlaggedImage]
+    quality_warnings: list[FlaggedImage] = []
     dominant_colors: list[DominantColor]
     garment_type_estimates: list[GarmentTypeEstimate]
     image_debug: list[ImageDebugInfo]

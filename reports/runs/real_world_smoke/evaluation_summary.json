@@ -1,0 +1,36 @@
+{
+  "evaluation_failed": false,
+  "total_cases_found": 0,
+  "total_cases_attempted": 0,
+  "total_cases_successfully_evaluated": 0,
+  "runtime_error_count": 0,
+  "total_cases_evaluated": 0,
+  "exact_match_accuracy": null,
+  "acceptable_match_accuracy": null,
+  "flagged_exact_match_accuracy": null,
+  "flagged_partial_match_accuracy": null,
+  "by_case_type": {},
+  "confusion_matrix": {
+    "consistent": {
+      "consistent": 0,
+      "needs_review": 0,
+      "inconsistent": 0
+    },
+    "needs_review": {
+      "consistent": 0,
+      "needs_review": 0,
+      "inconsistent": 0
+    },
+    "inconsistent": {
+      "consistent": 0,
+      "needs_review": 0,
+      "inconsistent": 0
+    }
+  },
+  "worst_case_types": [],
+  "notes": [
+    "Accuracies are calculated only over cases that were successfully evaluated.",
+    "acceptable_match uses acceptable_status when present; otherwise it falls back to expected_status.",
+    "No cases were successfully evaluated; accuracy values are null."
+  ]
+}

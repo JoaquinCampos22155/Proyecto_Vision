@@ -1,0 +1,237 @@
+{
+  "baseline_found": true,
+  "baseline_id": "baseline_v0_3_post_fix",
+  "source_run": "reports/runs/post_fix_validation",
+  "metric_deltas": {
+    "exact_match_accuracy": {
+      "baseline": 0.774194,
+      "current": 0.709677,
+      "delta": -0.064517
+    },
+    "acceptable_match_accuracy": {
+      "baseline": 1.0,
+      "current": 0.967742,
+      "delta": -0.032258
+    },
+    "flagged_exact_match_accuracy": {
+      "baseline": 0.83871,
+      "current": 0.774194,
+      "delta": -0.064516
+    },
+    "flagged_partial_match_accuracy": {
+      "baseline": 0.870968,
+      "current": 0.806452,
+      "delta": -0.064516
+    },
+    "runtime_error_count": {
+      "baseline": 0,
+      "current": 0,
+      "delta": 0.0
+    }
+  },
+  "by_case_type": {
+    "invalid_images": {
+      "exact_match_accuracy": {
+        "baseline": 0.333333,
+        "current": 0.333333,
+        "delta": 0.0
+      },
+      "acceptable_match_accuracy": {
+        "baseline": 1.0,
+        "current": 1.0,
+        "delta": 0.0
+      },
+      "flagged_exact_match_accuracy": {
+        "baseline": 1.0,
+        "current": 0.666667,
+        "delta": -0.333333
+      },
+      "flagged_partial_match_accuracy": {
+        "baseline": 1.0,
+        "current": 1.0,
+        "delta": 0.0
+      },
+      "count": {
+        "baseline": 3,
+        "current": 3
+      }
+    },
+    "one_wrong_image": {
+      "exact_match_accuracy": {
+        "baseline": 0.8,
+        "current": 1.0,
+        "delta": 0.2
+      },
+      "acceptable_match_accuracy": {
+        "baseline": 1.0,
+        "current": 1.0,
+        "delta": 0.0
+      },
+      "flagged_exact_match_accuracy": {
+        "baseline": 0.8,
+        "current": 0.0,
+        "delta": -0.8
+      },
+      "flagged_partial_match_accuracy": {
+        "baseline": 1.0,
+        "current": 0.0,
+        "delta": -1.0
+      },
+      "count": {
+        "baseline": 5,
+        "current": 5
+      }
+    },
+    "same_color_different_model": {
+      "exact_match_accuracy": {
+        "baseline": 0.0,
+        "current": 0.0,
+        "delta": 0.0
+      },
+      "acceptable_match_accuracy": {
+        "baseline": 1.0,
+        "current": 0.666667,
+        "delta": -0.333333
+      },
+      "flagged_exact_match_accuracy": {
+        "baseline": 0.0,
+        "current": 1.0,
+        "delta": 1.0
+      },
+      "flagged_partial_match_accuracy": {
+        "baseline": 0.0,
+        "current": 1.0,
+        "delta": 1.0
+      },
+      "count": {
+        "baseline": 3,
+        "current": 3
+      }
+    },
+    "same_garment_type_different_color": {
+      "exact_match_accuracy": {
+        "baseline": 1.0,
+        "current": 1.0,
+        "delta": 0.0
+      },
+      "acceptable_match_accuracy": {
+        "baseline": 1.0,
+        "current": 1.0,
+        "delta": 0.0
+      },
+      "flagged_exact_match_accuracy": {
+        "baseline": 1.0,
+        "current": 1.0,
+        "delta": 0.0
+      },
+      "flagged_partial_match_accuracy": {
+        "baseline": 1.0,
+        "current": 1.0,
+        "delta": 0.0
+      },
+      "count": {
+        "baseline": 2,
+        "current": 2
+      }
+    },
+    "same_product_closeups": {
+      "exact_match_accuracy": {
+        "baseline": 1.0,
+        "current": 1.0,
+        "delta": 0.0
+      },
+      "acceptable_match_accuracy": {
+        "baseline": 1.0,
+        "current": 1.0,
+        "delta": 0.0
+      },
+      "flagged_exact_match_accuracy": {
+        "baseline": 1.0,
+        "current": 1.0,
+        "delta": 0.0
+      },
+      "flagged_partial_match_accuracy": {
+        "baseline": 1.0,
+        "current": 1.0,
+        "delta": 0.0
+      },
+      "count": {
+        "baseline": 6,
+        "current": 6
+      }
+    },
+    "same_product_hard_conditions": {
+      "exact_match_accuracy": {
+        "baseline": 0.75,
+        "current": 0.0,
+        "delta": -0.75
+      },
+      "acceptable_match_accuracy": {
+        "baseline": 1.0,
+        "current": 1.0,
+        "delta": 0.0
+      },
+      "flagged_exact_match_accuracy": {
+        "baseline": 0.75,
+        "current": 0.75,
+        "delta": 0.0
+      },
+      "flagged_partial_match_accuracy": {
+        "baseline": 0.75,
+        "current": 0.75,
+        "delta": 0.0
+      },
+      "count": {
+        "baseline": 4,
+        "current": 4
+      }
+    },
+    "same_product_normal": {
+      "exact_match_accuracy": {
+        "baseline": 1.0,
+        "current": 1.0,
+        "delta": 0.0
+      },
+      "acceptable_match_accuracy": {
+        "baseline": 1.0,
+        "current": 1.0,
+        "delta": 0.0
+      },
+      "flagged_exact_match_accuracy": {
+        "baseline": 1.0,
+        "current": 1.0,
+        "delta": 0.0
+      },
+      "flagged_partial_match_accuracy": {
+        "baseline": 1.0,
+        "current": 1.0,
+        "delta": 0.0
+      },
+      "count": {
+        "baseline": 8,
+        "current": 8
+      }
+    }
+  },
+  "confusion_matrix": {
+    "consistent": {
+      "consistent": 14,
+      "needs_review": 4,
+      "inconsistent": 0
+    },
+    "needs_review": {
+      "consistent": 0,
+      "needs_review": 6,
+      "inconsistent": 2
+    },
+    "inconsistent": {
+      "consistent": 1,
+      "needs_review": 2,
+      "inconsistent": 2
+    }
+  },
+  "warnings": [
+    "one_wrong_image flagged_partial accuracy dropped below guardrail."
+  ],
+  "leakage_warnings": []
+}

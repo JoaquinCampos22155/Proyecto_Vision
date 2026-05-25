@@ -1,0 +1,3 @@
+case_folder,case_id,case_type,severity,issue_type,message,filename
+70,,,info,empty_folder_skipped,Folder has no image files and was skipped.,
+102,,,info,empty_folder_skipped,Folder has no image files and was skipped.,
