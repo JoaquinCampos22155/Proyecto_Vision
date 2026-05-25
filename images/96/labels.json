@@ -1,0 +1,75 @@
+{
+  "case_id": "case_0096",
+  "case_type": "same_color_different_model",
+  "expected_status": "inconsistent",
+  "acceptable_status": [
+    "needs_review",
+    "inconsistent"
+  ],
+  "capture_context": "mixed",
+  "product_category": "unknown",
+  "main_product_description": "mixed images from two visually similar products with the same or very similar color but different model details",
+  "image_count": 6,
+  "is_complete_case": true,
+  "expected_flagged_images": [],
+  "expected_flagged_filenames": [],
+  "expected_conflict_type": "different_model_same_color",
+  "difficulty": "hard",
+  "notes": "This case mixes images from two visually similar products. The products may share color, category, or brand, but they differ in model details such as cut, collar, seams, label, pattern, logo, or shape. Since the set is split between product A and product B, the system should mark the listing as inconsistent or needs_review rather than flagging only one individual image.",
+  "product_groups": {
+    "A": [
+      "00_product_a_front.jpg",
+      "01_product_a_back.jpg",
+      "02_product_a_detail_label.jpg"
+    ],
+    "B": [
+      "03_product_b_front.jpg",
+      "04_product_b_back.jpg",
+      "05_product_b_detail_label.jpg"
+    ]
+  },
+  "images": [
+    {
+      "filename": "00_product_a_front.jpg",
+      "view_type": "main_front_flat",
+      "product_group": "A",
+      "expected_flag": false,
+      "issue_type": "none"
+    },
+    {
+      "filename": "01_product_a_back.jpg",
+      "view_type": "main_back_flat",
+      "product_group": "A",
+      "expected_flag": false,
+      "issue_type": "none"
+    },
+    {
+      "filename": "02_product_a_detail_label.jpg",
+      "view_type": "detail_label",
+      "product_group": "A",
+      "expected_flag": false,
+      "issue_type": "none"
+    },
+    {
+      "filename": "03_product_b_front.jpg",
+      "view_type": "main_front_flat",
+      "product_group": "B",
+      "expected_flag": false,
+      "issue_type": "different_model_same_color"
+    },
+    {
+      "filename": "04_product_b_back.jpg",
+      "view_type": "main_back_flat",
+      "product_group": "B",
+      "expected_flag": false,
+      "issue_type": "different_model_same_color"
+    },
+    {
+      "filename": "05_product_b_detail_label.jpg",
+      "view_type": "detail_label",
+      "product_group": "B",
+      "expected_flag": false,
+      "issue_type": "different_model_same_color"
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "case_id": "case_0103",
+  "case_type": "same_garment_type_different_color",
+  "expected_status": "inconsistent",
+  "acceptable_status": [
+    "inconsistent",
+    "needs_review"
+  ],
+  "capture_context": "mixed",
+  "product_category": "unknown",
+  "main_product_description": "mixed images from the same garment type but clearly different colors",
+  "image_count": 6,
+  "is_complete_case": true,
+  "expected_flagged_images": [
+    0,
+    2
+  ],
+  "expected_flagged_filenames": [
+    "00_black_front.jpg",
+    "02_black_back.jpg"
+  ],
+  "expected_conflict_type": "different_color_same_garment_type",
+  "difficulty": "medium",
+  "color_groups": {
+    "black": [
+      "00_black_front.jpg",
+      "02_black_back.jpg"
+    ],
+    "pink": [
+      "01_pink_detail_label.jpg",
+      "03_pink_front.jpg",
+      "04_pink_detail_fabric.jpg",
+      "05_pink_top_half.jpg"
+    ]
+  },
+  "notes": "This case mixes images from the same garment type but clearly different colors. The system should detect the color mismatch and mark the listing as inconsistent or needs_review.",
+  "images": [
+    {
+      "filename": "00_black_front.jpg",
+      "view_type": "main_front_flat",
+      "color_group": "black",
+      "product_group": "B",
+      "expected_flag": true,
+      "issue_type": "color_mismatch",
+      "severity": "high",
+      "expected_reason": "This image shows the same garment type but in a clearly different color than the primary product group."
+    },
+    {
+      "filename": "01_pink_detail_label.jpg",
+      "view_type": "detail_label",
+      "color_group": "pink",
+      "product_group": "A",
+      "expected_flag": false,
+      "issue_type": "none"
+    },
+    {
+      "filename": "02_black_back.jpg",
+      "view_type": "main_back_flat",
+      "color_group": "black",
+      "product_group": "B",
+      "expected_flag": true,
+      "issue_type": "color_mismatch",
+      "severity": "high",
+      "expected_reason": "This image shows the same garment type but in a clearly different color than the primary product group."
+    },
+    {
+      "filename": "03_pink_front.jpg",
+      "view_type": "main_front_flat",
+      "color_group": "pink",
+      "product_group": "A",
+      "expected_flag": false,
+      "issue_type": "none"
+    },
+    {
+      "filename": "04_pink_detail_fabric.jpg",
+      "view_type": "detail_fabric",
+      "color_group": "pink",
+      "product_group": "A",
+      "expected_flag": false,
+      "issue_type": "none"
+    },
+    {
+      "filename": "05_pink_top_half.jpg",
+      "view_type": "front_top_half",
+      "color_group": "pink",
+      "product_group": "A",
+      "expected_flag": false,
+      "issue_type": "none"
+    }
+  ]
+}

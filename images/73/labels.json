@@ -1,0 +1,68 @@
+{
+  "case_id": "case_0073",
+  "case_type": "one_wrong_image",
+  "expected_status": "needs_review",
+  "acceptable_status": [
+    "needs_review",
+    "inconsistent"
+  ],
+  "capture_context": "mixed",
+  "product_category": "unknown",
+  "main_product_description": "same product listing with one incorrect product image mixed in",
+  "image_count": 6,
+  "is_complete_case": true,
+  "expected_flagged_images": [
+    5
+  ],
+  "expected_flagged_filenames": [
+    "05_wrong_product.jpeg"
+  ],
+  "difficulty": "medium",
+  "notes": "Five images are expected to belong to the same product. One image belongs to a different product and should be flagged without automatically treating the whole set as a failed listing.",
+  "images": [
+    {
+      "filename": "00_main_front.jpeg",
+      "view_type": "main_front_flat",
+      "product_group": "A",
+      "expected_flag": false,
+      "issue_type": "none"
+    },
+    {
+      "filename": "01_main_back.jpeg",
+      "view_type": "main_back_flat",
+      "product_group": "A",
+      "expected_flag": false,
+      "issue_type": "none"
+    },
+    {
+      "filename": "02_front_top_half.jpeg",
+      "view_type": "front_top_half",
+      "product_group": "A",
+      "expected_flag": false,
+      "issue_type": "none"
+    },
+    {
+      "filename": "03_detail_label.jpeg",
+      "view_type": "detail_label",
+      "product_group": "A",
+      "expected_flag": false,
+      "issue_type": "none"
+    },
+    {
+      "filename": "04_detail_fabric.jpeg",
+      "view_type": "detail_fabric",
+      "product_group": "A",
+      "expected_flag": false,
+      "issue_type": "none"
+    },
+    {
+      "filename": "05_wrong_product.jpeg",
+      "view_type": "main_front_flat",
+      "product_group": "B",
+      "expected_flag": true,
+      "issue_type": "wrong_product",
+      "severity": "high",
+      "expected_reason": "This image belongs to a different product than the rest of the listing."
+    }
+  ]
+}

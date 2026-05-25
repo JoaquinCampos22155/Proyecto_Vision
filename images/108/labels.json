@@ -1,0 +1,91 @@
+{
+  "case_id": "case_0108",
+  "case_type": "same_garment_type_different_color",
+  "expected_status": "inconsistent",
+  "acceptable_status": [
+    "inconsistent",
+    "needs_review"
+  ],
+  "capture_context": "mixed",
+  "product_category": "unknown",
+  "main_product_description": "mixed images from the same garment type but clearly different colors",
+  "image_count": 6,
+  "is_complete_case": true,
+  "expected_flagged_images": [
+    1,
+    4
+  ],
+  "expected_flagged_filenames": [
+    "01_black_back.jpg",
+    "04_black_front.jpg"
+  ],
+  "expected_conflict_type": "different_color_same_garment_type",
+  "difficulty": "medium",
+  "color_groups": {
+    "black": [
+      "01_black_back.jpg",
+      "04_black_front.jpg"
+    ],
+    "green": [
+      "00_green_back.jpg",
+      "02_green_detail_label.jpg",
+      "03_green_front.jpg",
+      "05_green_detail_fabric.jpg"
+    ]
+  },
+  "notes": "This case mixes images from the same garment type but clearly different colors. The system should detect the color mismatch and mark the listing as inconsistent or needs_review.",
+  "images": [
+    {
+      "filename": "00_green_back.jpg",
+      "view_type": "main_back_flat",
+      "color_group": "green",
+      "product_group": "A",
+      "expected_flag": false,
+      "issue_type": "none"
+    },
+    {
+      "filename": "01_black_back.jpg",
+      "view_type": "main_back_flat",
+      "color_group": "black",
+      "product_group": "B",
+      "expected_flag": true,
+      "issue_type": "color_mismatch",
+      "severity": "high",
+      "expected_reason": "This image shows the same garment type but in a clearly different color than the primary product group."
+    },
+    {
+      "filename": "02_green_detail_label.jpg",
+      "view_type": "detail_label",
+      "color_group": "green",
+      "product_group": "A",
+      "expected_flag": false,
+      "issue_type": "none"
+    },
+    {
+      "filename": "03_green_front.jpg",
+      "view_type": "main_front_flat",
+      "color_group": "green",
+      "product_group": "A",
+      "expected_flag": false,
+      "issue_type": "none"
+    },
+    {
+      "filename": "04_black_front.jpg",
+      "view_type": "main_front_flat",
+      "color_group": "black",
+      "product_group": "B",
+      "expected_flag": true,
+      "issue_type": "color_mismatch",
+      "severity": "high",
+      "expected_reason": "This image shows the same garment type but in a clearly different color than the primary product group."
+    },
+    {
+      "filename": "05_green_detail_fabric.jpg",
+      "view_type": "detail_fabric",
+      "color_group": "green",
+      "product_group": "A",
+      "expected_flag": false,
+      "issue_type": "none"
+    }
+  ]
+}

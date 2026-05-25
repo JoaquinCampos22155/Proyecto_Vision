@@ -1,0 +1,81 @@
+{
+  "case_id": "case_0101",
+  "case_type": "same_garment_type_different_color",
+  "expected_status": "inconsistent",
+  "acceptable_status": [
+    "inconsistent",
+    "needs_review"
+  ],
+  "capture_context": "mixed",
+  "product_category": "unknown",
+  "main_product_description": "mixed images from the same garment type but clearly different colors",
+  "image_count": 6,
+  "is_complete_case": true,
+  "expected_flagged_images": [],
+  "expected_flagged_filenames": [],
+  "expected_conflict_type": "different_color_same_garment_type",
+  "difficulty": "medium",
+  "color_groups": {
+    "blue": [
+      "04_blue_front.jpg",
+      "05_blue_detail_fabric.jpg",
+      "06_blue_back.JPG"
+    ],
+    "white": [
+      "00_white_front.jpg",
+      "01_white_detail_label.jpg",
+      "03_white_back.jpg"
+    ]
+  },
+  "notes": "This case mixes images from the same garment type but clearly different colors. The system should detect the color mismatch and mark the listing as inconsistent or needs_review.",
+  "images": [
+    {
+      "filename": "00_white_front.jpg",
+      "view_type": "main_front_flat",
+      "color_group": "white",
+      "product_group": "B",
+      "expected_flag": false,
+      "issue_type": "color_group_conflict"
+    },
+    {
+      "filename": "01_white_detail_label.jpg",
+      "view_type": "detail_label",
+      "color_group": "white",
+      "product_group": "B",
+      "expected_flag": false,
+      "issue_type": "color_group_conflict"
+    },
+    {
+      "filename": "03_white_back.jpg",
+      "view_type": "main_back_flat",
+      "color_group": "white",
+      "product_group": "B",
+      "expected_flag": false,
+      "issue_type": "color_group_conflict"
+    },
+    {
+      "filename": "04_blue_front.jpg",
+      "view_type": "main_front_flat",
+      "color_group": "blue",
+      "product_group": "A",
+      "expected_flag": false,
+      "issue_type": "color_group_conflict"
+    },
+    {
+      "filename": "05_blue_detail_fabric.jpg",
+      "view_type": "detail_fabric",
+      "color_group": "blue",
+      "product_group": "A",
+      "expected_flag": false,
+      "issue_type": "color_group_conflict"
+    },
+    {
+      "filename": "06_blue_back.JPG",
+      "view_type": "main_back_flat",
+      "color_group": "blue",
+      "product_group": "A",
+      "expected_flag": false,
+      "issue_type": "color_group_conflict"
+    }
+  ]
+}
