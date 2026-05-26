@@ -1,0 +1,56 @@
+{
+  "baseline_file": "docs/evaluation_baselines/baseline_v0_3_post_fix.json",
+  "validation_metrics": {
+    "exact_match_accuracy": 0.70339,
+    "acceptable_match_accuracy": 0.940678,
+    "flagged_exact_match_accuracy": 0.686441,
+    "flagged_partial_match_accuracy": 0.728814,
+    "runtime_error_count": 0
+  },
+  "test_metrics": null,
+  "delta_vs_baseline": {
+    "exact_match_accuracy": {
+      "baseline": 0.774194,
+      "current": 0.70339,
+      "delta": -0.070804
+    },
+    "acceptable_match_accuracy": {
+      "baseline": 1.0,
+      "current": 0.940678,
+      "delta": -0.059322
+    },
+    "flagged_exact_match_accuracy": {
+      "baseline": 0.83871,
+      "current": 0.686441,
+      "delta": -0.152269
+    },
+    "flagged_partial_match_accuracy": {
+      "baseline": 0.870968,
+      "current": 0.728814,
+      "delta": -0.142154
+    },
+    "runtime_error_count": {
+      "baseline": 0,
+      "current": 0,
+      "delta": 0.0
+    }
+  },
+  "protected_category_regression_warnings": [
+    "same_product_normal acceptable accuracy regressed below guardrail.",
+    "one_wrong_image flagged_partial accuracy dropped below guardrail.",
+    "same_product_normal acceptable accuracy dropped by -0.066667.",
+    "same_product_closeups acceptable accuracy dropped by -0.041667.",
+    "one_wrong_image acceptable accuracy dropped by -0.15."
+  ],
+  "possible_overfitting_warnings": [
+    "same_product_normal acceptable accuracy regressed below guardrail.",
+    "one_wrong_image flagged_partial accuracy dropped below guardrail.",
+    "same_product_normal acceptable accuracy dropped by -0.066667.",
+    "same_product_closeups acceptable accuracy dropped by -0.041667.",
+    "one_wrong_image acceptable accuracy dropped by -0.15."
+  ],
+  "notes": [
+    "This report compares the current run to the frozen validation baseline.",
+    "If a separate test run exists, compare it manually before using validation gains as evidence of production readiness."
+  ]
+}

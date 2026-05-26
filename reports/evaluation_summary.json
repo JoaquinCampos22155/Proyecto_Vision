@@ -1,0 +1,111 @@
+{
+  "evaluation_failed": false,
+  "total_cases_found": 118,
+  "total_cases_attempted": 118,
+  "total_cases_successfully_evaluated": 118,
+  "runtime_error_count": 0,
+  "total_cases_evaluated": 118,
+  "exact_match_accuracy": 0.70339,
+  "acceptable_match_accuracy": 0.940678,
+  "flagged_exact_match_accuracy": 0.686441,
+  "flagged_partial_match_accuracy": 0.728814,
+  "by_case_type": {
+    "invalid_images": {
+      "count": 10,
+      "exact_match_accuracy": 0.7,
+      "acceptable_match_accuracy": 1.0,
+      "flagged_exact_match_accuracy": 0.8,
+      "flagged_partial_match_accuracy": 1.0
+    },
+    "one_wrong_image": {
+      "count": 20,
+      "exact_match_accuracy": 0.85,
+      "acceptable_match_accuracy": 0.85,
+      "flagged_exact_match_accuracy": 0.05,
+      "flagged_partial_match_accuracy": 0.1
+    },
+    "same_color_different_model": {
+      "count": 10,
+      "exact_match_accuracy": 0.0,
+      "acceptable_match_accuracy": 0.9,
+      "flagged_exact_match_accuracy": 0.9,
+      "flagged_partial_match_accuracy": 0.9
+    },
+    "same_garment_type_different_color": {
+      "count": 9,
+      "exact_match_accuracy": 0.666667,
+      "acceptable_match_accuracy": 1.0,
+      "flagged_exact_match_accuracy": 0.333333,
+      "flagged_partial_match_accuracy": 0.555556
+    },
+    "same_product_closeups": {
+      "count": 24,
+      "exact_match_accuracy": 0.958333,
+      "acceptable_match_accuracy": 0.958333,
+      "flagged_exact_match_accuracy": 0.958333,
+      "flagged_partial_match_accuracy": 0.958333
+    },
+    "same_product_hard_conditions": {
+      "count": 15,
+      "exact_match_accuracy": 0.133333,
+      "acceptable_match_accuracy": 1.0,
+      "flagged_exact_match_accuracy": 0.6,
+      "flagged_partial_match_accuracy": 0.6
+    },
+    "same_product_normal": {
+      "count": 30,
+      "exact_match_accuracy": 0.933333,
+      "acceptable_match_accuracy": 0.933333,
+      "flagged_exact_match_accuracy": 0.933333,
+      "flagged_partial_match_accuracy": 0.933333
+    }
+  },
+  "confusion_matrix": {
+    "consistent": {
+      "consistent": 53,
+      "needs_review": 14,
+      "inconsistent": 2
+    },
+    "needs_review": {
+      "consistent": 3,
+      "needs_review": 24,
+      "inconsistent": 3
+    },
+    "inconsistent": {
+      "consistent": 1,
+      "needs_review": 12,
+      "inconsistent": 6
+    }
+  },
+  "worst_case_types": [
+    {
+      "case_type": "one_wrong_image",
+      "acceptable_match_accuracy": 0.85,
+      "count": 20
+    },
+    {
+      "case_type": "same_color_different_model",
+      "acceptable_match_accuracy": 0.9,
+      "count": 10
+    },
+    {
+      "case_type": "same_product_normal",
+      "acceptable_match_accuracy": 0.933333,
+      "count": 30
+    },
+    {
+      "case_type": "same_product_closeups",
+      "acceptable_match_accuracy": 0.958333,
+      "count": 24
+    },
+    {
+      "case_type": "same_product_hard_conditions",
+      "acceptable_match_accuracy": 1.0,
+      "count": 15
+    }
+  ],
+  "notes": [
+    "Accuracies are calculated only over cases that were successfully evaluated.",
+    "acceptable_match uses acceptable_status when present; otherwise it falls back to expected_status."
+  ]
+}

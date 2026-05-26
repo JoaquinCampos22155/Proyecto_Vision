@@ -1,0 +1,397 @@
+{
+  "labels": {
+    "case_id": "case_0001",
+    "case_type": "same_product_normal",
+    "expected_status": "consistent",
+    "capture_context": "hanger",
+    "product_category": "t_shirt",
+    "main_product_description": "dark green Zara t-shirt on hanger",
+    "image_count": 6,
+    "is_complete_case": true,
+    "expected_flagged_images": [],
+    "difficulty": "easy",
+    "notes": "All six images belong to the same product. The set includes front views, back view, and collar/label details.",
+    "images": [
+      {
+        "filename": "detail_label.jpeg",
+        "view_type": "detail_label",
+        "product_group": "A",
+        "expected_flag": false
+      },
+      {
+        "filename": "front_top_half.jpeg",
+        "view_type": "front_top_half",
+        "product_group": "A",
+        "expected_flag": false
+      },
+      {
+        "filename": "main_back_flat.jpeg",
+        "view_type": "main_back_flat",
+        "product_group": "A",
+        "expected_flag": false
+      },
+      {
+        "filename": "main_front_flat.jpeg",
+        "view_type": "main_front_flat",
+        "product_group": "A",
+        "expected_flag": false
+      },
+      {
+        "filename": "main_front_flat_1.jpeg",
+        "view_type": "main_front_flat",
+        "product_group": "A",
+        "expected_flag": false
+      },
+      {
+        "filename": "main_front_flat_2.jpeg",
+        "view_type": "main_front_flat",
+        "product_group": "A",
+        "expected_flag": false
+      }
+    ]
+  },
+  "system_response": {
+    "product_id": "case_0001",
+    "image_count": 6,
+    "status": "inconsistent",
+    "scores": {
+      "raw_consistency_score": 0.573,
+      "main_view_score": 0.6799,
+      "detail_support_score": 0.8061,
+      "color_consistency_score": 0.9008,
+      "robust_consistency_score": 0.7447,
+      "low_confidence_reason": null
+    },
+    "note": "This is an MVP compatibility score using generic pretrained embeddings. It should be calibrated with real ecommerce image datasets before production use.",
+    "thresholds": {
+      "consistent": 0.7,
+      "needs_review": 0.5,
+      "main_view_low_similarity": 0.45,
+      "main_view_severe_similarity": 0.35,
+      "strong_color_mismatch": 0.55
+    },
+    "view_types": [
+      {
+        "image_index": 0,
+        "view_type": "detail_label",
+        "confidence": 0.74,
+        "note": "Heuristic MVP estimate"
+      },
+      {
+        "image_index": 1,
+        "view_type": "main_front",
+        "confidence": 0.72,
+        "note": "Heuristic MVP estimate"
+      },
+      {
+        "image_index": 2,
+        "view_type": "main_back",
+        "confidence": 0.72,
+        "note": "Heuristic MVP estimate"
+      },
+      {
+        "image_index": 3,
+        "view_type": "main_front",
+        "confidence": 0.72,
+        "note": "Heuristic MVP estimate"
+      },
+      {
+        "image_index": 4,
+        "view_type": "main_front",
+        "confidence": 0.72,
+        "note": "Heuristic MVP estimate"
+      },
+      {
+        "image_index": 5,
+        "view_type": "main_front",
+        "confidence": 0.72,
+        "note": "Heuristic MVP estimate"
+      }
+    ],
+    "flagged_images": [
+      {
+        "image_index": 5,
+        "filename": "main_front_flat_2.jpeg",
+        "original_filename": "main_front_flat_2.jpeg",
+        "view_type": "main_front",
+        "severity": "high",
+        "issue_type": "visual_outlier",
+        "reason": "Main or partial product view is very different from other main views.",
+        "recommended_action": "Review manually before accepting this listing.",
+        "average_similarity_against_all": 0.2618,
+        "average_similarity_against_same_view_type": 0.2556,
+        "average_similarity_against_main_views": 0.2574
+      },
+      {
+        "image_index": 2,
+        "filename": "main_back_flat.jpeg",
+        "original_filename": "main_back_flat.jpeg",
+        "view_type": "main_back",
+        "severity": "high",
+        "issue_type": "color_mismatch",
+        "reason": "Main-view color clustering found this image in a minority color group.",
+        "recommended_action": "Review manually; this can indicate the same garment type in a different color.",
+        "average_similarity_against_all": 0.6059,
+        "average_similarity_against_same_view_type": null,
+        "average_similarity_against_main_views": 0.6124
+      }
+    ],
+    "quality_warnings": [],
+    "dominant_colors": [
+      {
+        "image_index": 0,
+        "color_hex": "#001830",
+        "color_rgb": [
+          0,
+          24,
+          48
+        ]
+      },
+      {
+        "image_index": 1,
+        "color_hex": "#306078",
+        "color_rgb": [
+          48,
+          96,
+          120
+        ]
+      },
+      {
+        "image_index": 2,
+        "color_hex": "#001830",
+        "color_rgb": [
+          0,
+          24,
+          48
+        ]
+      },
+      {
+        "image_index": 3,
+        "color_hex": "#183030",
+        "color_rgb": [
+          24,
+          48,
+          48
+        ]
+      },
+      {
+        "image_index": 4,
+        "color_hex": "#183030",
+        "color_rgb": [
+          24,
+          48,
+          48
+        ]
+      },
+      {
+        "image_index": 5,
+        "color_hex": "#303030",
+        "color_rgb": [
+          48,
+          48,
+          48
+        ]
+      }
+    ],
+    "garment_type_estimates": [
+      {
+        "image_index": 0,
+        "label": "unknown",
+        "confidence": 0.0,
+        "note": "No garment-specific detection was found. The full image or a generic YOLO crop was used as fallback."
+      },
+      {
+        "image_index": 1,
+        "label": "unknown",
+        "confidence": 0.0,
+        "note": "No garment-specific detection was found. The full image or a generic YOLO crop was used as fallback."
+      },
+      {
+        "image_index": 2,
+        "label": "unknown",
+        "confidence": 0.0,
+        "note": "No garment-specific detection was found. The full image or a generic YOLO crop was used as fallback."
+      },
+      {
+        "image_index": 3,
+        "label": "unknown",
+        "confidence": 0.0,
+        "note": "No garment-specific detection was found. The full image or a generic YOLO crop was used as fallback."
+      },
+      {
+        "image_index": 4,
+        "label": "unknown",
+        "confidence": 0.0,
+        "note": "No garment-specific detection was found. The full image or a generic YOLO crop was used as fallback."
+      },
+      {
+        "image_index": 5,
+        "label": "unknown",
+        "confidence": 0.0,
+        "note": "No garment-specific detection was found. The full image or a generic YOLO crop was used as fallback."
+      }
+    ],
+    "image_debug": [
+      {
+        "image_index": 0,
+        "original_filename": "detail_label.jpeg",
+        "detector_used": false,
+        "detection_found": false,
+        "detection_confidence": null,
+        "bbox": null,
+        "fallback_used": true,
+        "crop_strategy": "full_image",
+        "rejected_detection_reason": null
+      },
+      {
+        "image_index": 1,
+        "original_filename": "front_top_half.jpeg",
+        "detector_used": false,
+        "detection_found": false,
+        "detection_confidence": null,
+        "bbox": null,
+        "fallback_used": true,
+        "crop_strategy": "full_image",
+        "rejected_detection_reason": null
+      },
+      {
+        "image_index": 2,
+        "original_filename": "main_back_flat.jpeg",
+        "detector_used": false,
+        "detection_found": false,
+        "detection_confidence": null,
+        "bbox": null,
+        "fallback_used": true,
+        "crop_strategy": "full_image",
+        "rejected_detection_reason": null
+      },
+      {
+        "image_index": 3,
+        "original_filename": "main_front_flat.jpeg",
+        "detector_used": false,
+        "detection_found": false,
+        "detection_confidence": null,
+        "bbox": null,
+        "fallback_used": true,
+        "crop_strategy": "full_image",
+        "rejected_detection_reason": null
+      },
+      {
+        "image_index": 4,
+        "original_filename": "main_front_flat_1.jpeg",
+        "detector_used": false,
+        "detection_found": false,
+        "detection_confidence": null,
+        "bbox": null,
+        "fallback_used": true,
+        "crop_strategy": "full_image",
+        "rejected_detection_reason": null
+      },
+      {
+        "image_index": 5,
+        "original_filename": "main_front_flat_2.jpeg",
+        "detector_used": false,
+        "detection_found": false,
+        "detection_confidence": null,
+        "bbox": null,
+        "fallback_used": true,
+        "crop_strategy": "full_image",
+        "rejected_detection_reason": null
+      }
+    ],
+    "crop_debug_urls": [
+      {
+        "image_index": 0,
+        "url": "/static/debug_crops/case_0001_d978ef17e34c4bd1ba4a1af6744411ff_image_0.jpg"
+      },
+      {
+        "image_index": 1,
+        "url": "/static/debug_crops/case_0001_528e51ae32bd4dfca1da7424b3f9fdd8_image_1.jpg"
+      },
+      {
+        "image_index": 2,
+        "url": "/static/debug_crops/case_0001_8481fc31c6ce481ca10b6f992fc5fd68_image_2.jpg"
+      },
+      {
+        "image_index": 3,
+        "url": "/static/debug_crops/case_0001_3de9d2b976ac4575b6900e856b06125d_image_3.jpg"
+      },
+      {
+        "image_index": 4,
+        "url": "/static/debug_crops/case_0001_494c33c76df14183aed6c4dd3310e82c_image_4.jpg"
+      },
+      {
+        "image_index": 5,
+        "url": "/static/debug_crops/case_0001_524656d911e04582ad1d734d5b49090d_image_5.jpg"
+      }
+    ],
+    "pairwise_similarity_matrix": [
+      [
+        1.0,
+        0.8061,
+        0.5799,
+        0.5982,
+        0.7247,
+        0.2794
+      ],
+      [
+        0.8061,
+        1.0,
+        0.6421,
+        0.7177,
+        0.8147,
+        0.2626
+      ],
+      [
+        0.5799,
+        0.6421,
+        1.0,
+        0.7943,
+        0.7504,
+        0.2628
+      ],
+      [
+        0.5982,
+        0.7177,
+        0.7943,
+        1.0,
+        0.8581,
+        0.2461
+      ],
+      [
+        0.7247,
+        0.8147,
+        0.7504,
+        0.8581,
+        1.0,
+        0.2581
+      ],
+      [
+        0.2794,
+        0.2626,
+        0.2628,
+        0.2461,
+        0.2581,
+        1.0
+      ]
+    ],
+    "condition_estimate": {
+      "label": "unknown",
+      "confidence": 0.0,
+      "note": "Condition estimation is only a suggestion and should not be used as a final decision."
+    }
+  },
+  "comparison": {
+    "exact_match": false,
+    "acceptable_match": false,
+    "flagged_exact_match": false,
+    "flagged_partial_match": false,
+    "error_type": "both"
+  },
+  "expected_flagged_filenames": [],
+  "predicted_flagged_filenames": [
+    "main_front_flat_2.jpeg",
+    "main_back_flat.jpeg"
+  ],
+  "error": ""
+}

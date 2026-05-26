@@ -1,0 +1,241 @@
+{
+  "baseline_found": true,
+  "baseline_id": "baseline_v0_3_post_fix",
+  "source_run": "reports/runs/post_fix_validation",
+  "metric_deltas": {
+    "exact_match_accuracy": {
+      "baseline": 0.774194,
+      "current": 0.70339,
+      "delta": -0.070804
+    },
+    "acceptable_match_accuracy": {
+      "baseline": 1.0,
+      "current": 0.940678,
+      "delta": -0.059322
+    },
+    "flagged_exact_match_accuracy": {
+      "baseline": 0.83871,
+      "current": 0.686441,
+      "delta": -0.152269
+    },
+    "flagged_partial_match_accuracy": {
+      "baseline": 0.870968,
+      "current": 0.728814,
+      "delta": -0.142154
+    },
+    "runtime_error_count": {
+      "baseline": 0,
+      "current": 0,
+      "delta": 0.0
+    }
+  },
+  "by_case_type": {
+    "invalid_images": {
+      "exact_match_accuracy": {
+        "baseline": 0.333333,
+        "current": 0.7,
+        "delta": 0.366667
+      },
+      "acceptable_match_accuracy": {
+        "baseline": 1.0,
+        "current": 1.0,
+        "delta": 0.0
+      },
+      "flagged_exact_match_accuracy": {
+        "baseline": 1.0,
+        "current": 0.8,
+        "delta": -0.2
+      },
+      "flagged_partial_match_accuracy": {
+        "baseline": 1.0,
+        "current": 1.0,
+        "delta": 0.0
+      },
+      "count": {
+        "baseline": 3,
+        "current": 10
+      }
+    },
+    "one_wrong_image": {
+      "exact_match_accuracy": {
+        "baseline": 0.8,
+        "current": 0.85,
+        "delta": 0.05
+      },
+      "acceptable_match_accuracy": {
+        "baseline": 1.0,
+        "current": 0.85,
+        "delta": -0.15
+      },
+      "flagged_exact_match_accuracy": {
+        "baseline": 0.8,
+        "current": 0.05,
+        "delta": -0.75
+      },
+      "flagged_partial_match_accuracy": {
+        "baseline": 1.0,
+        "current": 0.1,
+        "delta": -0.9
+      },
+      "count": {
+        "baseline": 5,
+        "current": 20
+      }
+    },
+    "same_color_different_model": {
+      "exact_match_accuracy": {
+        "baseline": 0.0,
+        "current": 0.0,
+        "delta": 0.0
+      },
+      "acceptable_match_accuracy": {
+        "baseline": 1.0,
+        "current": 0.9,
+        "delta": -0.1
+      },
+      "flagged_exact_match_accuracy": {
+        "baseline": 0.0,
+        "current": 0.9,
+        "delta": 0.9
+      },
+      "flagged_partial_match_accuracy": {
+        "baseline": 0.0,
+        "current": 0.9,
+        "delta": 0.9
+      },
+      "count": {
+        "baseline": 3,
+        "current": 10
+      }
+    },
+    "same_garment_type_different_color": {
+      "exact_match_accuracy": {
+        "baseline": 1.0,
+        "current": 0.666667,
+        "delta": -0.333333
+      },
+      "acceptable_match_accuracy": {
+        "baseline": 1.0,
+        "current": 1.0,
+        "delta": 0.0
+      },
+      "flagged_exact_match_accuracy": {
+        "baseline": 1.0,
+        "current": 0.333333,
+        "delta": -0.666667
+      },
+      "flagged_partial_match_accuracy": {
+        "baseline": 1.0,
+        "current": 0.555556,
+        "delta": -0.444444
+      },
+      "count": {
+        "baseline": 2,
+        "current": 9
+      }
+    },
+    "same_product_closeups": {
+      "exact_match_accuracy": {
+        "baseline": 1.0,
+        "current": 0.958333,
+        "delta": -0.041667
+      },
+      "acceptable_match_accuracy": {
+        "baseline": 1.0,
+        "current": 0.958333,
+        "delta": -0.041667
+      },
+      "flagged_exact_match_accuracy": {
+        "baseline": 1.0,
+        "current": 0.958333,
+        "delta": -0.041667
+      },
+      "flagged_partial_match_accuracy": {
+        "baseline": 1.0,
+        "current": 0.958333,
+        "delta": -0.041667
+      },
+      "count": {
+        "baseline": 6,
+        "current": 24
+      }
+    },
+    "same_product_hard_conditions": {
+      "exact_match_accuracy": {
+        "baseline": 0.75,
+        "current": 0.133333,
+        "delta": -0.616667
+      },
+      "acceptable_match_accuracy": {
+        "baseline": 1.0,
+        "current": 1.0,
+        "delta": 0.0
+      },
+      "flagged_exact_match_accuracy": {
+        "baseline": 0.75,
+        "current": 0.6,
+        "delta": -0.15
+      },
+      "flagged_partial_match_accuracy": {
+        "baseline": 0.75,
+        "current": 0.6,
+        "delta": -0.15
+      },
+      "count": {
+        "baseline": 4,
+        "current": 15
+      }
+    },
+    "same_product_normal": {
+      "exact_match_accuracy": {
+        "baseline": 1.0,
+        "current": 0.933333,
+        "delta": -0.066667
+      },
+      "acceptable_match_accuracy": {
+        "baseline": 1.0,
+        "current": 0.933333,
+        "delta": -0.066667
+      },
+      "flagged_exact_match_accuracy": {
+        "baseline": 1.0,
+        "current": 0.933333,
+        "delta": -0.066667
+      },
+      "flagged_partial_match_accuracy": {
+        "baseline": 1.0,
+        "current": 0.933333,
+        "delta": -0.066667
+      },
+      "count": {
+        "baseline": 8,
+        "current": 30
+      }
+    }
+  },
+  "confusion_matrix": {
+    "consistent": {
+      "consistent": 53,
+      "needs_review": 14,
+      "inconsistent": 2
+    },
+    "needs_review": {
+      "consistent": 3,
+      "needs_review": 24,
+      "inconsistent": 3
+    },
+    "inconsistent": {
+      "consistent": 1,
+      "needs_review": 12,
+      "inconsistent": 6
+    }
+  },
+  "warnings": [
+    "same_product_normal acceptable accuracy regressed below guardrail.",
+    "one_wrong_image flagged_partial accuracy dropped below guardrail.",
+    "same_product_normal acceptable accuracy dropped by -0.066667.",
+    "same_product_closeups acceptable accuracy dropped by -0.041667.",
+    "one_wrong_image acceptable accuracy dropped by -0.15."
+  ],
+  "leakage_warnings": []
+}
